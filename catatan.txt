@@ -1,0 +1,155 @@
+# Analisa Website Warung 86
+
+## 📛 Nama Aplikasi
+**Warung 86**  
+- Identitas kuat, mudah diingat, dan fleksibel dipakai di berbagai platform.  
+- Menunjukkan nuansa lokal yang hangat sekaligus modern.  
+- Cocok dijadikan brand utama aplikasi website.  
+
+### Tagline Pilihan
+- "Nikmati Rasa, Reservasi Mudah"  
+- "Pesan Meja, Scan QR, Santap Tenang"  
+- "Warung Modern, Rasa Tradisional"  
+- "Dari Meja ke Rasa, Semua Ada di Warung 86"  
+
+---
+
+## 1. Dashboard
+- Untuk admin dan owner warung.
+- Fungsi:
+  - Melihat data reservasi meja.
+  - Mengelola daftar menu (tambah/edit/hapus).
+  - Mengecek laporan transaksi harian, mingguan, bulanan.
+  - Monitoring pembayaran (status: pending, lunas, gagal).
+
+## 2. Login
+- Admin: mengakses dashboard untuk manajemen.
+- User/Pelanggan:
+  - Login menggunakan email/nomor HP.
+  - Bisa melihat riwayat reservasi & pesanan.
+
+## 3. Pilihan Menu
+- Tampilan daftar menu dalam kategori:
+  - Makanan utama.
+  - Minuman.
+  - Snack.
+- Fitur:
+  - Tambah ke keranjang.
+  - Lihat detail menu (deskripsi, harga, foto).
+  - Promo/harga spesial ditampilkan.
+
+## 4. Alamat & Informasi Warung
+- Informasi Warung 86:
+  - Alamat lengkap (Google Maps terintegrasi).
+  - Jam buka & tutup.
+  - Nomor kontak (WhatsApp, telepon).
+  - Tentang Warung (profil singkat).
+
+## 5. Reservasi Meja
+- User bisa:
+  - Pilih tanggal & jam.
+  - Tentukan jumlah orang.
+  - Pilih meja yang masih tersedia.
+- Output:
+  - User mendapatkan kode booking.
+  - Notifikasi via email/WhatsApp.
+
+## 6. Pembayaran via QR Code
+- Metode pembayaran utama:
+  - QRIS (scan QR code).
+  - E-wallet & transfer bank.
+- Proses:
+  1. User checkout pesanan/reservasi.
+  2. QR Code otomatis muncul.
+  3. User scan & bayar.
+  4. Sistem verifikasi → status berubah menjadi "Lunas".
+- Output:
+  - Invoice digital.
+  - Notifikasi ke user & admin.
+
+---
+
+# Alur Singkat
+1. User login / daftar.
+2. User lihat menu atau reservasi meja.
+3. Tambah ke keranjang / pilih meja.
+4. Checkout → pembayaran via QR.
+5. Admin cek dashboard untuk update data.
+6. Sistem kirim notifikasi & simpan laporan transaksi.
+
+Dashboard (Admin/Owner)
+
+Login (Admin & User)
+
+Pilihan Menu (Kategori Makanan/Minuman)
+
+Alamat & Informasi Warung
+
+Reservasi Meja
+
+Pembayaran via QR Code (QRIS, e-wallet, bank transfer)
+
+Alur Singkat (End-to-End Flow)
+
+
+
+# 📌 Struktur Halaman Admin - Warung86
+
+## 🔐 1. Login Admin
+- Form login (email/username + password).
+- Akses terbatas hanya untuk admin (middleware `auth` + `role:admin`).
+
+---
+
+## 📊 2. Dashboard
+- Ringkasan cepat:
+  - Jumlah menu tersedia.
+  - Jumlah reservasi kursi (hari ini / minggu ini).
+  - Status pembayaran (pending, sukses, gagal).
+- Grafik sederhana (opsional, misalnya omzet mingguan).
+
+---
+
+## 🍽️ 3. Kelola Menu
+- Tambah menu baru:
+  - Nama menu
+  - Harga
+  - Deskripsi
+  - Kategori
+  - Upload foto
+- Edit menu.
+- Hapus menu.
+- Tabel daftar menu (list semua menu).
+
+---
+
+## 🪑 4. Kelola Reservasi
+- Tabel daftar reservasi kursi:
+  - Nama pelanggan
+  - Jumlah orang
+  - Tanggal & jam reservasi
+  - Status reservasi (pending, confirmed, selesai)
+- Update status reservasi.
+
+---
+
+## 💳 5. Kelola Pembayaran
+- Daftar transaksi pembayaran:
+  - Nama pelanggan
+  - Nominal
+  - Metode pembayaran
+  - Status (pending, sukses, gagal)
+- Integrasi dengan **payment gateway** (contoh: Midtrans).
+
+---
+
+## 👥 6. Kelola User (Opsional)
+- Data pelanggan (jika sistem pakai login user).
+- Fitur hapus / blokir user.
+
+---
+
+# 🎯 Catatan
+- Halaman admin berfungsi **hanya untuk pengelola**.
+- User biasa hanya bisa mengakses: **Beranda, Menu, Reservasi, Tentang, Kontak, Pembayaran**.
+- Semua fitur admin bisa dibuat dengan **Laravel + Blade**, lalu role dibatasi dengan middleware.

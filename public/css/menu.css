@@ -1,0 +1,211 @@
+:root {
+      --bg-color: #3a2f28;
+      --divider-color: #605349;
+      --text-color: #ffffff;
+      --text-secondary-color: rgba(255, 255, 255, 0.9);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      overflow-x: hidden;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .container {
+      max-width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 80px;
+      padding-right: 80px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+    }
+
+    /* ===== Section Header ===== */
+    #section-header {
+      padding-top: 50px;
+    }
+
+    .site-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 39px;
+    }
+
+    .main-nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 90px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .main-nav a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 32px;
+      font-weight: 700;
+      transition: opacity 0.3s;
+    }
+
+    .main-nav a:hover {
+      opacity: 0.8;
+    }
+
+    .divider {
+      height: 3px;
+      background-color: var(--divider-color);
+      margin-top: 42px;
+    }
+
+    @media (max-width: 1200px) {
+      .main-nav ul {
+        gap: 4vw;
+      }
+      .main-nav a {
+        font-size: 24px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-nav ul {
+        gap: 15px 30px;
+      }
+      .main-nav a {
+        font-size: 18px;
+      }
+      #section-header {
+        padding-top: 20px;
+      }
+      .divider {
+        margin-top: 20px;
+      }
+    }
+
+    /* ===== Section Hero ===== */
+    #section-hero {
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+
+    .hero-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+      flex-wrap: nowrap; /* tetap di samping teks */
+    }
+
+    .text-column {
+      flex: 0 1 550px;
+    }
+
+    .text-box {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 30px;
+      padding: 50px;
+      background-color: rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .text-box p {
+      font-size: 22px;
+      line-height: 1.6;
+      font-weight: 400;
+      margin: 0;
+      color: var(--text-secondary-color);
+    }
+
+    /* Gambar kopi bulat dan responsif di samping teks */
+    .image-column {
+      flex: 0 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .coffee-cup-img {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .coffee-cup-img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      margin-top: 60px;
+    }
+
+    .dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 3px solid var(--divider-color);
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .dot.active {
+      background-color: var(--divider-color);
+    }
+
+    /* Responsiveness */
+    @media (max-width: 1200px) {
+      .hero-content {
+        flex-wrap: wrap;
+        text-align: center;
+      }
+      .text-column {
+        flex-basis: 100%;
+        max-width: 600px;
+      }
+      .image-column {
+        flex-basis: 100%;
+        margin-top: 30px;
+      }
+      #section-hero {
+        padding-top: 60px;
+        padding-bottom: 60px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .text-box {
+        padding: 30px;
+      }
+      .text-box p {
+        font-size: 18px;
+      }
+      #section-hero {
+        padding-top: 40px;
+        padding-bottom: 40px;
+      }
+      .pagination {
+        margin-top: 40px;
+      }
+    }

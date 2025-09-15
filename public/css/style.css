@@ -1,0 +1,219 @@
+:root {
+  --bg-color: #3A2E28;
+  --text-color: #ffffff;
+  --border-color: #605349;
+  --primary-font: 'Inter', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--primary-font);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* CSS from section:header */
+.site-header {
+  padding-top: 35px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 30px;
+  padding-bottom: 35px;
+}
+
+.main-nav ul {
+  display: flex;
+  gap: 58px;
+}
+
+.nav-link {
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  padding: 8px 0;
+}
+
+.nav-link.active {
+  border: 1px solid var(--text-color);
+  border-radius: 20px;
+  padding: 8px 24px;
+}
+
+.btn.sign-in-btn {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  font-weight: 700;
+  font-size: 16px;
+  padding: 12px 32px;
+  border-radius: 25px;
+  letter-spacing: 0.1em;
+}
+
+.header-divider {
+  border-bottom: 3px solid var(--border-color);
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    padding-bottom: 20px;
+  }
+  .main-nav ul {
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav-link {
+    font-size: 14px;
+  }
+}
+
+/* CSS from section:hero */
+.hero-section {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  overflow: hidden;
+}
+
+.hero-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.hero-content {
+  flex: 1;
+  max-width: 586px;
+}
+
+.pre-title {
+  font-size: 20px;
+  margin: 0 0 16px;
+}
+
+.main-title {
+  font-size: 64px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.description {
+  font-size: 18px;
+  line-height: 1.8;
+  margin: 40px 0;
+  max-width: 500px;
+}
+
+.btn.shop-now-btn {
+  border: 1px solid var(--text-color);
+  border-radius: 30px;
+  padding: 16px 40px;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.hero-image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-height: 500px;
+}
+
+.coffee-cup-image {
+  width: 300px;          /* ukuran lebih besar */
+  height: 300px;         /* supaya tetap kotak untuk bulat */
+  max-width: 80%;        /* menyesuaikan layar jika kecil */
+  aspect-ratio: 1 / 1;   /* pastikan selalu kotak */
+  object-fit: cover;     /* crop agar proporsional */
+  border-radius: 50%;    /* membuat lingkaran sempurna */
+  display: block;
+  margin: 0 auto;        /* center di container */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+@media (max-width: 1024px) {
+  .hero-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-content {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .description {
+    max-width: 600px;
+  }
+  .hero-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+  .main-title {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 48px;
+  }
+  .pre-title {
+    font-size: 18px;
+  }
+  .description {
+    font-size: 16px;
+  }
+  .hero-image-container {
+    min-height: auto;
+    margin-top: 40px;
+  }
+}
