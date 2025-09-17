@@ -1,0 +1,84 @@
+/* ===== ROOT COLOR ===== */
+:root {
+    --primary-color: #4b2e2e; /* coklat tua */
+    --secondary-color: #d9a066; /* coklat terang */
+    --background-color: #f5f0ec; /* krem lembut */
+    --text-color: #ffffff;
+}
+
+/* ===== GLOBAL STYLE ===== */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* ===== FORM CONTAINER ===== */
+.reservation-container {
+    background-color: var(--primary-color);
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    width: 350px;
+    color: var(--text-color);
+}
+
+.reservation-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: var(--secondary-color);
+}
+
+/* ===== FORM ELEMENTS ===== */
+.reservation-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.reservation-container input, 
+.reservation-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.reservation-container input:focus,
+.reservation-container select:focus {
+    outline: 2px solid var(--secondary-color);
+}
+
+/* ===== SUBMIT BUTTON ===== */
+.reservation-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    color: var(--primary-color);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reservation-container button:hover {
+    background-color: #c78944;
+    transform: scale(1.05);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 400px) {
+    .reservation-container {
+        width: 90%;
+        padding: 30px 20px;
+    }
+}
