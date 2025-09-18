@@ -45,7 +45,7 @@
                 <!-- Menu Item -->
                 <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
                     <img src="{{ asset('images/enak.jpg') }}" alt="Americano" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
-                    <h3>Mie Nyemek</h3>
+                    <h3>Tepo Pecel</h3>
                     <p>mantap, simple, enak.</p>
                     <p class="menu-item-price">19k</p>
                     <div>
@@ -56,7 +56,7 @@
 
                 <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
                     <img src="{{ asset('images/seduh.jpg') }}" alt="Mexican" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
-                    <h3>MEXICAN</h3>
+                    <h3>Rujak Petis</h3>
                     <p>Balanced and flavorful.</p>
                     <p class="menu-item-price">$19.99</p>
                     <div>
@@ -67,7 +67,7 @@
 
                 <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
                     <img src="{{ asset('images/jus.jpg') }}" alt="Cappuccino" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
-                    <h3>CAPPUCCINO</h3>
+                    <h3>tepo Ces</h3>
                     <p>Rich and creamy taste.</p>
                     <p class="menu-item-price">$19.99</p>
                     <div>
@@ -78,7 +78,7 @@
 
                 <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
                     <img src="{{ asset('images/enak.jpg') }}" alt="Latte" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
-                    <h3>LATTE</h3>
+                    <h3>Tahu Tek Jumbo</h3>
                     <p>Smooth and milky.</p>
                     <p class="menu-item-price">$21.99</p>
                     <div>
@@ -89,7 +89,7 @@
 
                 <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
                     <img src="{{ asset('images/seduh.jpg') }}" alt="Mocha" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
-                    <h3>MOCHA</h3>
+                    <h3>Krupuk Pecel</h3>
                     <p>Chocolate infused.</p>
                     <p class="menu-item-price">$22.99</p>
                     <div>
@@ -100,7 +100,7 @@
 
                 <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
                     <img src="{{ asset('images/jus.jpg') }}" alt="Espresso" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
-                    <h3>ESPRESSO</h3>
+                    <h3>Simpolan</h3>
                     <p>Strong and bold.</p>
                     <p class="menu-item-price">$18.99</p>
                     <div>
@@ -111,7 +111,7 @@
 
                 <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
                     <img src="{{ asset('images/enak.jpg') }}" alt="Flat White" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
-                    <h3>FLAT WHITE</h3>
+                    <h3>Es Blewah</h3>
                     <p>Silky and smooth.</p>
                     <p class="menu-item-price">$20.99</p>
                     <div>
@@ -122,7 +122,7 @@
 
                 <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
                     <img src="{{ asset('images/seduh.jpg') }}" alt="Macchiato" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
-                    <h3>MACCHIATO</h3>
+                    <h3>Ayam Goreng</h3>
                     <p>Bold with foam.</p>
                     <p class="menu-item-price">$21.99</p>
                     <div>
@@ -136,64 +136,46 @@
             </section>
 
 
-<!-- Menu Lainnya -->
-<section id="other-menu" class="menu-section" style="margin-top:50px;">
-  <div class="container">
-    <h2 class="menu-title" style="text-align:center; margin-bottom:20px;">MENU LAINNYA</h2>
+<section style="margin:50px auto; max-width:900px;">
+  <div style="text-align:center; font-size:28px; font-weight:bold; color:#927950; margin-bottom:20px;">MENU LAINYA</div>
+
+  <div style="background:#4a3f35; border-radius:15px; padding:20px; color:white; display:flex; gap:20px; flex-wrap:wrap; justify-content:flex-start; font-family:monospace;">
     
-    <div class="menu-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
-      
-      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
-        1. Es Teh
-      </div>
-      
-      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
-        2. Jus Jeruk
-      </div>
-      
-      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
-        3. Jus Mangga
-      </div>
-      
-      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
-        4. Jus Apel
-      </div>
-      
-      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
-        5. Jus Jambu
-      </div>
-      
-      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
-        6. Jus Strawberry
-      </div>
-      
-      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
-        7. Air Mineral
-      </div>
-      
-      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
-        8. Es Susu
-      </div>
-      
-      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
-        9. Lemon Tea
-      </div>
-      
-      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
-        10. Chocolate Drink
-      </div>
-      
-      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
-        11. Milkshake Vanilla
-      </div>
-      
-      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
-        12. Milkshake Coklat
-      </div>
-      
+    <!-- Kolom 1 -->
+    <div style="display:flex; flex-direction:column; gap:12px; min-width:150px;">
+      <div><b>1.  Es Teh - 5k</b></div>
+      <div><b>2.  Jus Jeruk - 10K</b></div>
+      <div><b>3.  Jus Mangga - 12k</b></div>
+      <div><b>4.  Jus Apel - Rp12.000</b></div>
+      <div><b>5.  Jus Jambu - Rp12.000</b></div>
     </div>
+
+    <!-- Kolom 2 -->
+    <div style="display:flex; flex-direction:column; gap:12px; min-width:150px;">
+      <div><b>6.  Jus Strawberry - Rp15.000</b></div>
+      <div><b>7.  Air Mineral - Rp3.000</b></div>
+      <div><b>8.  Es Susu - Rp10.000</b></div>
+      <div><b>9.  Lemon Tea - Rp8.000</b></div>
+      <div><b>10. Chocolate Drink - Rp15.000</b></div>
+    </div>
+
+    <!-- Kolom 3 -->
+    <div style="display:flex; flex-direction:column; gap:12px; min-width:150px;">
+      <div><b>11. Milkshake Vanilla - Rp18.000</b></div>
+      <div><b>12. Milkshake Coklat - Rp18.000</b></div>
+      <div><b>13. Nasi Goreng - Rp20.000</b></div>
+      <div><b>14. Mie Goreng - Rp18.000</b></div>
+      <div><b>15. cilor - Rp25.000</b></div>
+    </div>
+
+    <!-- Kolom 4 -->
+    <div style="display:flex; flex-direction:column; gap:12px; min-width:150px;">
+      <div><b>16. Rujak - Rp15.000</b></div>
+    </div>
+
   </div>
 </section>
+
 
    <section id="reservasi" class="reservasi-section">
   <div style="background: #927950; padding: 30px; border-radius: 20px; box-shadow: 0 8px 20px rgba(90,62,43,0.3); max-width: 900px; margin: auto;">
