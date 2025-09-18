@@ -136,140 +136,123 @@
             </section>
 
 
-
-            <!-- Menu Lainnya -->
-            <section id="other-menu" class="menu-section" style="margin-top:50px;">
-            <div class="container">
-                <h2 class="menu-title">MENU LAINNYA</h2>
-                <div class="menu-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
-                
-                <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <h3>ES TEH</h3>
-                    <p>Segar dan manis.</p>
-                    <p class="menu-item-price">5 ribu</p>
-                </article>
-
-                <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <h3>JUS JERUK</h3>
-                    <p>Fresh perasan jeruk asli.</p>
-                    <p class="menu-item-price">$7.00</p>
-                </article>
-
-                <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <h3>JUS MANGGA</h3>
-                    <p>Manis dan kental.</p>
-                    <p class="menu-item-price">$7.50</p>
-                </article>
-
-                <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <h3>JUS APEL</h3>
-                    <p>Segar alami.</p>
-                    <p class="menu-item-price">$6.50</p>
-                </article>
-
-                <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <h3>JUS JAMBU</h3>
-                    <p>Kaya vitamin C.</p>
-                    <p class="menu-item-price">$6.00</p>
-                </article>
-
-                <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <h3>JUS STRAWBERRY</h3>
-                    <p>Asam manis menyegarkan.</p>
-                    <p class="menu-item-price">$8.00</p>
-                </article>
-
-                <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <h3>AIR MINERAL</h3>
-                    <p>Botol 600ml.</p>
-                    <p class="menu-item-price">$2.00</p>
-                </article>
-
-                <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <h3>ES SUSU</h3>
-                    <p>Susu segar dingin.</p>
-                    <p class="menu-item-price">$5.50</p>
-                </article>
-
-                <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <h3>LEMON TEA</h3>
-                    <p>Teh dengan perasan lemon.</p>
-                    <p class="menu-item-price">$6.00</p>
-                </article>
-
-                <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <h3>CHOCOLATE DRINK</h3>
-                    <p>Hangat atau dingin.</p>
-                    <p class="menu-item-price">$7.50</p>
-                </article>
-
-                <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <h3>MILKSHAKE VANILLA</h3>
-                    <p>Manis dan creamy.</p>
-                    <p class="menu-item-price">$9.00</p>
-                </article>
-
-                <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <h3>MILKSHAKE COKLAT</h3>
-                    <p>Kaya rasa coklat.</p>
-                    <p class="menu-item-price">$9.00</p>
-                </article>
-
-                </div>
-            </div>
-            </section>
-    <section id="reservasi" class="reservasi-section">
-    <div class="reservation-wrapper" style="display: flex; justify-content: center; align-items: flex-start; gap: 40px; flex-wrap: wrap;">
-
-        <!-- FORM RESERVASI -->
-        <div class="reservation-container" style="background: #3b2307; padding: 30px; border-radius: 15px; box-shadow: 0 8px 20px rgba(90,62,43,0.3); width: 400px; min-height: 450px; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-            <h2 style="color: #beb5af; margin-bottom: 20px;">Silakan Pilih Meja</h2>
-            <form>
-            <div class="form-row" style="display: flex; gap: 15px; margin-bottom: 15px;">
-                <div class="form-group" style="flex: 1;">
-                <label>Nama</label>
-                <input type="text" placeholder="Masukkan nama" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
-                </div>
-                <div class="form-group" style="flex: 1;">
-                <label>Jumlah Orang</label>
-                <input type="number" placeholder="Jumlah orang" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
-                </div>
-            </div>
-
-            <div class="form-row" style="display: flex; gap: 15px; margin-bottom: 15px;">
-                <div class="form-group" style="flex: 1;">
-                <label>Tanggal</label>
-                <input type="date" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
-                </div>
-                <div class="form-group" style="flex: 1;">
-                <label>Jam</label>
-                <input type="time" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
-                </div>
-            </div>
-            </form>
-        </div>
-        <button type="submit" style="width: 100%; background: #c49a6c; color: #fff; padding: 12px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.3s;">
-            Pesan Sekarang
-        </button>
-        </div>
-
-        <!-- SYARAT & KETENTUAN -->
-        <div class="terms-container" style="background: #fff8f0; padding: 30px; border-radius: 15px; box-shadow: 0 8px 20px rgba(90,62,43,0.3); width: 400px; min-height: 450px; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-            <h3 style="color: #5a3e2b; margin-bottom: 20px;">Syarat & Ketentuan</h3>
-            <ul style="text-align: left; color: #333; line-height: 1.6;">
-            <li>Reservasi minimal 45 menit sebelum kedatangan.</li>
-            <li>Mohon datang tepat waktu untuk memudahkan persiapan.</li>
-            <li>Setiap reservasi maksimal untuk 10 orang.</li>
-            <li>Harap informasikan alergi atau permintaan khusus di kolom tambahan.</li>
-            <li>Pembatalan reservasi dapat dilakukan 2 jam sebelum waktu reservasi.</li>
-            </ul>
-        </div>
-        </div>
-
+<!-- Menu Lainnya -->
+<section id="other-menu" class="menu-section" style="margin-top:50px;">
+  <div class="container">
+    <h2 class="menu-title" style="text-align:center; margin-bottom:20px;">MENU LAINNYA</h2>
+    
+    <div class="menu-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
+      
+      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
+        1. Es Teh
+      </div>
+      
+      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
+        2. Jus Jeruk
+      </div>
+      
+      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
+        3. Jus Mangga
+      </div>
+      
+      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
+        4. Jus Apel
+      </div>
+      
+      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
+        5. Jus Jambu
+      </div>
+      
+      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
+        6. Jus Strawberry
+      </div>
+      
+      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
+        7. Air Mineral
+      </div>
+      
+      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
+        8. Es Susu
+      </div>
+      
+      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
+        9. Lemon Tea
+      </div>
+      
+      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
+        10. Chocolate Drink
+      </div>
+      
+      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
+        11. Milkshake Vanilla
+      </div>
+      
+      <div class="menu-box" style="border:1px solid #ddd; border-radius:15px; text-align:center; padding:20px; font-weight:bold;">
+        12. Milkshake Coklat
+      </div>
+      
     </div>
-    </section>
+  </div>
+</section>
+
+   <section id="reservasi" class="reservasi-section">
+  <div style="background: #927950; padding: 30px; border-radius: 20px; box-shadow: 0 8px 20px rgba(90,62,43,0.3); max-width: 900px; margin: auto;">
+    
+    <!-- Flex 2 kolom -->
+    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+      
+      <!-- FORM RESERVASI -->
+      <div style="flex: 1; background: #4a3f35; padding: 25px; border-radius: 15px; color: #fff; min-height: 450px;">
+        <h2 style="color: #beb5af; margin-bottom: 20px;">Silakan Pilih Meja</h2>
+        <form>
+          <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+            <div style="flex: 1;">
+              <label>Nama</label>
+              <input type="text" placeholder="Masukkan nama" 
+                style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
+            </div>
+            <div style="flex: 1;">
+              <label>Jumlah Orang</label>
+              <input type="number" placeholder="Jumlah orang" 
+                style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+            <div style="flex: 1;">
+              <label>Tanggal</label>
+              <input type="date" 
+                style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
+            </div>
+            <div style="flex: 1;">
+              <label>Jam</label>
+              <input type="time" 
+                style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
+            </div>
+          </div>
+
+          <button type="submit" 
+            style="width: 100%; background: #c49a6c; color: #c49a6c; padding: 12px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.3s;">
+            Pesan Sekarang
+          </button>
+        </form>
+      </div>
+
+      <!-- SYARAT & KETENTUAN -->
+      <div style="flex: 1; background: #5a3e2b; padding: 25px; border-radius: 15px; min-height: 450px;">
+        <h3 style="color: #fff8f0; margin-bottom: 20px;">Syarat & Ketentuan</h3>
+        <ul style="text-align: left; color: #fff8f0; line-height: 1.6; padding-left: 20px;">
+          <li>Reservasi minimal 45 menit sebelum kedatangan.</li>
+          <li>Mohon datang tepat waktu untuk memudahkan persiapan.</li>
+          <li>Setiap reservasi maksimal untuk 10 orang.</li>
+          <li>Harap informasikan alergi atau permintaan khusus di kolom tambahan.</li>
+          <li>Pembatalan reservasi dapat dilakukan 2 jam sebelum waktu reservasi.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 
    <section id="lokasi" class="lokasi-section" style="margin-top:50px; text-align:center;">
