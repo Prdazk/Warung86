@@ -1,0 +1,203 @@
+/* ============================= */
+/* ROOT VARIABLES               */
+/* ============================= */
+:root {
+  --bg-color: #362C24;
+  --text-primary: #ffffff;
+  --accent-color: #c49a6c;
+  --muted: #e5dede;
+  --form-bg: #4b3621;
+  --input-bg: #3e2f25;
+}
+
+/* ============================= */
+/* GENERAL                       */
+/* ============================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  line-height: 1.7;
+  font-size: 17px;
+}
+.page-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ============================= */
+/* HEADER                        */
+/* ============================= */
+.site-header {
+  background: var(--bg-color);
+  border-bottom: 1px solid var(--accent-color);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 24px;
+}
+.logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 8px 18px;
+  border-radius: 30px;
+  transition: 0.3s;
+}
+.nav-link:hover,
+.nav-link.active {
+  background: var(--accent-color);
+  color: var(--bg-color);
+}
+.login-btn {
+  border-radius: 30px;
+  padding: 10px 24px;
+  background: var(--text-primary);
+  color: var(--bg-color);
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  transition: 0.3s;
+}
+.login-btn:hover {
+  background: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+/* ============================= */
+/* MENU SECTION / FORM           */
+/* ============================= */
+.menu-section {
+  padding: 60px 20px;
+  background-color: var(--form-bg);
+  border-radius: 16px;
+  margin-top: 40px;
+}
+.menu-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: var(--accent-color);
+}
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.form-group input,
+.form-group select {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--accent-color);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 16px;
+  transition: 0.3s;
+}
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--text-primary);
+  box-shadow: 0 0 6px rgba(196, 154, 108, 0.6);
+}
+
+/* ============================= */
+/* BUTTONS                       */
+/* ============================= */
+.btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+  text-align: center;
+}
+.btn-add {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+}
+.btn-add:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+.btn-edit {
+  background-color: var(--text-primary);
+  color: var(--bg-color);
+}
+.btn-edit:hover {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+}
+.btn-delete {
+  background-color: #ff4d4d;
+  color: #fff;
+}
+.btn-delete:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
+/* ============================= */
+/* ALERT SUCCESS                 */
+/* ============================= */
+.alert-success {
+  background-color: #3a7d44;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* ============================= */
+/* RESPONSIVE                     */
+/* ============================= */
+@media (max-width: 768px) {
+  .menu-section {
+    padding: 40px 12px;
+  }
+  form {
+    max-width: 100%;
+    gap: 15px;
+  }
+  .form-group input,
+  .form-group select {
+    font-size: 15px;
+  }
+}

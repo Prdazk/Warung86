@@ -1,129 +1,246 @@
-/* ============================= */
-/* ROOT COLORS                  */
-/* ============================= */
 :root {
-    --bg-color: #362C24;        /* coklat tua untuk background utama */
-    --accent-color: #c49a6c;    /* coklat aksen untuk tombol */
-    --text-color: #ffffff;       /* putih untuk teks */
-    --line-color: #c49a6c;       /* warna garis bawah navbar */
+  --bg-color: #362C24;
+  --text-primary: #ffffff;
+  --accent-color: #c49a6c;
+  --muted: #e5dede;
 }
 
-/* ============================= */
-/* RESET / BASE                  */
-/* ============================= */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  line-height: 1.7;
+  font-size: 17px;
+}
+
+.page-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
 /* ============================= */
-/* HEADER & NAVBAR               */
+/* HEADER / NAVBAR               */
 /* ============================= */
 .site-header {
-    width: 100%;
-    background-color: var(--bg-color);
-    padding: 15px 50px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    border-bottom: 2px solid var(--line-color);
+  background: var(--bg-color);
+  border-bottom: 1px solid var(--accent-color);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 14px 24px;
 }
 
 .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: var(--text-color);
-    text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-decoration: none;
 }
 
 .main-nav {
-    display: flex;
-    gap: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.main-nav .nav-link {
-    color: var(--text-color);
-    text-decoration: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    transition: background 0.3s;
+.nav-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 8px 18px;
+  border-radius: 30px;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-.main-nav .nav-link:hover {
-    background-color: var(--accent-color);
-    color: #362C24;
+.nav-link:hover,
+.nav-link.active {
+  background: var(--accent-color);
+  color: var(--bg-color);
+}
+
+.login-btn {
+  border-radius: 30px;
+  padding: 10px 24px;
+  background: var(--text-primary);
+  color: var(--bg-color);
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  background: var(--accent-color);
+  color: var(--bg-color);
+  transform: translateY(-2px);
 }
 
 /* ============================= */
-/* HERO SECTION                  */
+/* HERO / BERANDA SECTION        */
 /* ============================= */
 .hero-section {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 150px 50px 50px 50px; /* padding top untuk navbar fixed */
-    min-height: 100vh;
-    position: relative;
+  padding: 80px 24px;
 }
 
 .hero-container {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: flex-end;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
 }
 
 .hero-text {
-    max-width: 500px;
+  text-align: left;
+  max-width: 600px;
 }
 
-.pre-title {
-    font-size: 18px;
-    color: var(--accent-color);
-    margin-bottom: 10px;
+.hero-text .pre-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--accent-color);
+  margin-bottom: 12px;
 }
 
-.hero-title {
-    font-size: 48px;
-    line-height: 1.2;
-    margin-bottom: 15px;
+.hero-text .hero-title {
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 18px;
 }
 
-.hero-subtitle {
-    font-size: 20px;
-    margin-bottom: 25px;
+.hero-text .hero-subtitle {
+  font-size: 19px;
+  color: var(--muted);
+  margin-bottom: 28px;
 }
 
 .hero-cta {
-    text-decoration: none;
-    padding: 10px 25px;
-    background-color: var(--accent-color);
-    color: #362C24;
-    border-radius: 5px;
-    transition: opacity 0.3s;
+  display: inline-block;
+  background: var(--text-primary);
+  color: var(--bg-color);
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .hero-cta:hover {
-    opacity: 0.8;
+  background: var(--accent-color);
+  transform: translateY(-2px);
 }
 
 .hero-image img {
-    max-width: 400px;
-    height: auto;
-    object-fit: cover;
-    border-radius: 10px;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 16px;
+}
+
+/* ============================= */
+/* TENTANG & KONTAK SECTIONS     */
+/* ============================= */
+.tentang-section,
+.kontak-section {
+  padding: 80px 20px;
+  text-align: center;
+  background-color: #3e2f25; /* warna hangat, cocok dengan tema */
+  border-radius: 16px;
+  margin: 40px 0;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tentang-section:hover,
+.kontak-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.4);
+}
+
+.tentang-section h2,
+.kontak-section h2 {
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+  color: var(--accent-color);
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.tentang-section p,
+.kontak-section p {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 700px;
+  margin: 0 auto 15px;
+  line-height: 1.7;
+}
+
+.kontak-section p a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.kontak-section p a:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+
+/* Tambahan styling ikon (jika nanti mau pakai ikon) */
+.kontak-section .icon {
+  font-size: 28px;
+  color: var(--accent-color);
+  margin-right: 12px;
+  vertical-align: middle;
+}
+
+/* ============================= */
+/* RESPONSIVE                    */
+/* ============================= */
+@media (max-width: 992px) {
+  .tentang-section,
+  .kontak-section {
+    padding: 60px 15px;
+  }
+
+  .tentang-section h2,
+  .kontak-section h2 {
+    font-size: 2.2rem;
+  }
+
+  .tentang-section p,
+  .kontak-section p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tentang-section,
+  .kontak-section {
+    padding: 50px 15px;
+  }
+
+  .tentang-section h2,
+  .kontak-section h2 {
+    font-size: 2rem;
+  }
+
+  .tentang-section p,
+  .kontak-section p {
+    font-size: 15px;
+  }
 }
