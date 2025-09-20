@@ -5,7 +5,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Warung Coffee 86</title>
                 <!-- Link CSS utama -->
-                <link rel="stylesheet" href="css/beranda.css">
+                <link rel="stylesheet" href="css/user/style.css">
             
             </head>
             <body>
@@ -137,7 +137,7 @@
 
 
 <section style="margin:50px auto; max-width:900px;">
-  <div style="text-align:center; font-size:28px; font-weight:bold; color:#927950; margin-bottom:20px;">MENU LAINYA</div>
+  <div style="text-align:center; font-size:28px; font-weight:bold; color:#dbcbb0; margin-bottom:20px;">MENU LAINYA</div>
 
   <div style="background:#4a3f35; border-radius:15px; padding:20px; color:white; display:flex; gap:20px; flex-wrap:wrap; justify-content:flex-start; font-family:monospace;">
     
@@ -146,31 +146,31 @@
       <div><b>1.  Es Teh - 5k</b></div>
       <div><b>2.  Jus Jeruk - 10K</b></div>
       <div><b>3.  Jus Mangga - 12k</b></div>
-      <div><b>4.  Jus Apel - Rp12.000</b></div>
-      <div><b>5.  Jus Jambu - Rp12.000</b></div>
+      <div><b>4.  Jus Apel - 12K</b></div>
+      <div><b>5.  Jus Jambu - 12K</b></div>
     </div>
 
     <!-- Kolom 2 -->
     <div style="display:flex; flex-direction:column; gap:12px; min-width:150px;">
-      <div><b>6.  Jus Strawberry - Rp15.000</b></div>
-      <div><b>7.  Air Mineral - Rp3.000</b></div>
-      <div><b>8.  Es Susu - Rp10.000</b></div>
-      <div><b>9.  Lemon Tea - Rp8.000</b></div>
-      <div><b>10. Chocolate Drink - Rp15.000</b></div>
+      <div><b>6.  Jus Strawberry - 15K</b></div>
+      <div><b>7.  Air Mineral - 3K</b></div>
+      <div><b>8.  Es Susu - 10K</b></div>
+      <div><b>9.  Lemon Tea - 8K</b></div>
+      <div><b>10. Chocolate Drink - 15K</b></div>
     </div>
 
     <!-- Kolom 3 -->
     <div style="display:flex; flex-direction:column; gap:12px; min-width:150px;">
-      <div><b>11. Milkshake Vanilla - Rp18.000</b></div>
-      <div><b>12. Milkshake Coklat - Rp18.000</b></div>
-      <div><b>13. Nasi Goreng - Rp20.000</b></div>
-      <div><b>14. Mie Goreng - Rp18.000</b></div>
-      <div><b>15. cilor - Rp25.000</b></div>
+      <div><b>11. Milkshake Vanilla - 18K</b></div>
+      <div><b>12. Milkshake Coklat - 18K</b></div>
+      <div><b>13. Nasi Goreng - 20K</b></div>
+      <div><b>14. Mie Goreng - 18K</b></div>
+      <div><b>15. cilor - 25K</b></div>
     </div>
 
     <!-- Kolom 4 -->
     <div style="display:flex; flex-direction:column; gap:12px; min-width:150px;">
-      <div><b>16. Rujak - Rp15.000</b></div>
+      <div><b>16. Rujak - 15K</b></div>
     </div>
 
   </div>
@@ -214,7 +214,7 @@
           </div>
 
           <button type="submit" 
-            style="width: 100%; background: #c49a6c; color: #c49a6c; padding: 12px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.3s;">
+            style="width: 48%; background: #0a0a0a; color: #9b992f; padding: 12px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.3s;">
             Pesan Sekarang
           </button>
         </form>
@@ -238,7 +238,7 @@
 
 
    <section id="lokasi" class="lokasi-section" style="margin-top:50px; text-align:center;">
-  <h2 style="color:#b9b4ae; margin-bottom:20px;">📍 Lokasi Kami</h2>
+  <h2 style="color:#b9b4ae; margin-bottom:20px;">Lokasi Kami</h2>
 
   <!-- Maps -->
   <div style="display:flex; justify-content:center; margin-bottom:30px;">
@@ -258,7 +258,7 @@
     <a href="https://www.google.com/maps/place/Taman+Lembang+Desa+Ngale/@-7.4778519,111.6108283,15z" 
        target="_blank" 
        style="display:inline-block; padding:12px 24px; background:#4a3f35; color:#fff; text-decoration:none; border-radius:10px; font-weight:bold; transition:0.3s;">
-       📌 Buka di Google Maps
+       Buka di Google Maps
     </a>
   </div>
 

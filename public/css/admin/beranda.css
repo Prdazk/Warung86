@@ -1,0 +1,129 @@
+/* ============================= */
+/* ROOT COLORS                  */
+/* ============================= */
+:root {
+    --bg-color: #362C24;        /* coklat tua untuk background utama */
+    --accent-color: #c49a6c;    /* coklat aksen untuk tombol */
+    --text-color: #ffffff;       /* putih untuk teks */
+    --line-color: #c49a6c;       /* warna garis bawah navbar */
+}
+
+/* ============================= */
+/* RESET / BASE                  */
+/* ============================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* ============================= */
+/* HEADER & NAVBAR               */
+/* ============================= */
+.site-header {
+    width: 100%;
+    background-color: var(--bg-color);
+    padding: 15px 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    border-bottom: 2px solid var(--line-color);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.main-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.main-nav .nav-link {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.main-nav .nav-link:hover {
+    background-color: var(--accent-color);
+    color: #362C24;
+}
+
+/* ============================= */
+/* HERO SECTION                  */
+/* ============================= */
+.hero-section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 150px 50px 50px 50px; /* padding top untuk navbar fixed */
+    min-height: 100vh;
+    position: relative;
+}
+
+.hero-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.hero-text {
+    max-width: 500px;
+}
+
+.pre-title {
+    font-size: 18px;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+.hero-title {
+    font-size: 48px;
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+
+.hero-subtitle {
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+.hero-cta {
+    text-decoration: none;
+    padding: 10px 25px;
+    background-color: var(--accent-color);
+    color: #362C24;
+    border-radius: 5px;
+    transition: opacity 0.3s;
+}
+
+.hero-cta:hover {
+    opacity: 0.8;
+}
+
+.hero-image img {
+    max-width: 400px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
