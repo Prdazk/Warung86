@@ -12,10 +12,10 @@ class MenuController extends Controller
     public function index()
     {
         $menus = Menu::orderBy('nama')->get();
-        return view('admin.menu', compact('menus'));
+        return view('admin.menu', ['menu' => $menus]); // pakai $menu di view
     }
 
-    // Tampilkan form tambah menu
+    // Form tambah menu
     public function create()
     {
         return view('admin.tambah_menu');
@@ -24,7 +24,7 @@ class MenuController extends Controller
     // Simpan menu baru
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'nama' => 'required|string|max:255',
             'kategori' => 'required|string|max:50',
             'harga' => 'required|numeric',
@@ -32,13 +32,8 @@ class MenuController extends Controller
             'gambar' => 'nullable|image|max:2048'
         ]);
 
-        $data = $request->all();
-
         if($request->hasFile('gambar')){
-            $file = $request->file('gambar');
-            $filename = time().'_'.$file->getClientOriginalName();
-            $file->move(public_path('images'), $filename);
-            $data['gambar'] = $filename;
+            $data['gambar'] = $request->file('gambar')->storeAs('images', time().'_'.$request->file('gambar')->getClientOriginalName(), 'public');
         }
 
         Menu::create($data);
@@ -50,13 +45,13 @@ class MenuController extends Controller
     public function destroy($id)
     {
         $menu = Menu::find($id);
-        if($menu){
-            if($menu->gambar && file_exists(public_path('images/'.$menu->gambar))){
-                unlink(public_path('images/'.$menu->gambar));
-            }
-            $menu->delete();
-            return redirect()->route('admin.menu.index')->with('success', 'Menu berhasil dihapus');
+        if(!$menu) return redirect()->route('admin.menu.index')->with('error', 'Menu tidak ditemukan');
+
+        if($menu->gambar && file_exists(public_path('images/'.$menu->gambar))){
+            unlink(public_path('images/'.$menu->gambar));
         }
-        return redirect()->route('admin.menu.index')->with('error', 'Menu tidak ditemukan');
+
+        $menu->delete();
+        return redirect()->route('admin.menu.index')->with('success', 'Menu berhasil dihapus');
     }
 }

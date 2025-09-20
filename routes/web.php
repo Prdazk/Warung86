@@ -61,24 +61,31 @@ Route::prefix('admin')->group(function () {
         if (!session('admin_logged_in')) {
             return redirect()->route('admin.login');
         }
+
         $reservasi = Reservasi::latest()->get();
         return view('admin.beranda', compact('reservasi'));
     })->name('admin.beranda');
 
-    // ====================== ADMIN FUNCTIONALITY ======================
-    Route::middleware('admin_logged_in')->group(function() {
+    // Halaman reservasi
+    Route::get('reservasi', function() {
+        if (!session('admin_logged_in')) {
+            return redirect()->route('admin.login');
+        }
 
-        // ====================== Reservasi ======================
-        Route::get('reservasi', [ReservasiController::class, 'index'])->name('admin.reservasi.index');
-        Route::delete('reservasi/{id}', [ReservasiController::class, 'destroy'])->name('admin.reservasi.hapus');
-        Route::put('reservasi/{id}', [ReservasiController::class, 'update'])->name('admin.reservasi.edit');
+        $reservasi = Reservasi::latest()->get();
+        return view('admin.reservasi', compact('reservasi'));
+    })->name('admin.reservasi');
 
-        // ====================== Menu ======================
-        Route::get('menu', [MenuController::class, 'index'])->name('admin.menu.index');
-        Route::get('tambah-menu', [MenuController::class, 'create'])->name('admin.tambah.menu');
-        Route::post('menu/store', [MenuController::class, 'store'])->name('admin.menu.store');
-        Route::delete('menu/{id}', [MenuController::class, 'destroy'])->name('admin.menu.hapus');
-    });
+    // Hapus reservasi
+    Route::delete('reservasi/{id}', function($id){
+        if (!session('admin_logged_in')) {
+            return redirect()->route('admin.login');
+        }
+
+        $r = Reservasi::findOrFail($id);
+        $r->delete();
+        return back()->with('success', 'Reservasi berhasil dihapus');
+    })->name('admin.reservasi.hapus');
 
     // Logout admin
     Route::get('logout', function() {
@@ -86,4 +93,5 @@ Route::prefix('admin')->group(function () {
         session()->forget('admin_id');
         return redirect()->route('admin.login');
     })->name('admin.logout');
+
 });
