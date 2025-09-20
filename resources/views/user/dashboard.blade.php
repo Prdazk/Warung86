@@ -5,7 +5,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Warung Coffee 86</title>
                 <!-- Link CSS utama -->
-                <link rel="stylesheet" href="css/user/style.css">
+                <link rel="stylesheet" href="{{ asset('css/user/style.css') }}">
             
             </head>
             <body>
@@ -177,39 +177,59 @@
 </section>
 
 
-   <section id="reservasi" class="reservasi-section">
+ <section id="reservasi" class="reservasi-section">
   <div style="background: #927950; padding: 30px; border-radius: 20px; box-shadow: 0 8px 20px rgba(90,62,43,0.3); max-width: 900px; margin: auto;">
     
     <!-- Flex 2 kolom -->
     <div style="display: flex; gap: 20px; flex-wrap: wrap;">
       
       <!-- FORM RESERVASI -->
-      <div style="flex: 1; background: #4a3f35; padding: 25px; border-radius: 15px; color: #fff; min-height: 450px;">
+      <div style="flex: 1; background: #4a3f35; padding: 25px; border-radius: 15px; color: #fff; min-height: 520px;">
         <h2 style="color: #beb5af; margin-bottom: 20px;">Silakan Pilih Meja</h2>
-        <form>
+        <form method="POST" action="{{ route('user.reservasi.store') }}">
+          @csrf
           <div style="display: flex; gap: 15px; margin-bottom: 15px;">
             <div style="flex: 1;">
               <label>Nama</label>
-              <input type="text" placeholder="Masukkan nama" 
+              <input type="text" name="nama" placeholder="Masukkan nama" 
                 style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
             </div>
             <div style="flex: 1;">
               <label>Jumlah Orang</label>
-              <input type="number" placeholder="Jumlah orang" 
+              <input type="number" name="jumlah_orang" placeholder="Jumlah orang" 
                 style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
             </div>
           </div>
 
           <div style="display: flex; gap: 15px; margin-bottom: 15px;">
             <div style="flex: 1;">
-              <label>Tanggal</label>
-              <input type="date" 
-                style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
+              <label>Pilihan Meja</label>
+              <select name="pilihan_meja" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
+                <option value="">Pilih Meja</option>
+                <option value="1">Meja 1</option>
+                <option value="2">Meja 2</option>
+                <option value="3">Meja 3</option>
+                <option value="VIP">VIP</option>
+              </select>
             </div>
             <div style="flex: 1;">
+              <label>Tanggal</label>
+              <input type="date" name="tanggal" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+            <div style="flex: 1;">
               <label>Jam</label>
-              <input type="time" 
-                style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
+              <input type="time" name="jam" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
+            </div>
+            <div style="flex: 1;">
+              <label>Status</label>
+              <select name="status" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
+                <option value="Menunggu">Menunggu</option>
+                <option value="Dikonfirmasi">Dikonfirmasi</option>
+                <option value="Batal">Batal</option>
+              </select>
             </div>
           </div>
 
@@ -220,8 +240,9 @@
         </form>
       </div>
 
+
       <!-- SYARAT & KETENTUAN -->
-      <div style="flex: 1; background: #5a3e2b; padding: 25px; border-radius: 15px; min-height: 450px;">
+      <div style="flex: 1; background: #5a3e2b; padding: 25px; border-radius: 15px; min-height: 520px;">
         <h3 style="color: #fff8f0; margin-bottom: 20px;">Syarat & Ketentuan</h3>
         <ul style="text-align: left; color: #fff8f0; line-height: 1.6; padding-left: 20px;">
           <li>Reservasi minimal 45 menit sebelum kedatangan.</li>
@@ -234,6 +255,8 @@
     </div>
   </div>
 </section>
+
+
 
 
 
@@ -270,7 +293,7 @@
     
     <!-- Gambar Lokasi -->
     <div style="flex:1; min-width:300px;">
-      <img src="images/tamanngale.jpg" 
+      <img src="{{ asset('images/tamanngale.jpg') }}" 
            alt="Foto Lokasi Warung 86" 
            style="width:100%; height:350px; object-fit:cover; border-radius:15px; box-shadow:0 8px 20px rgba(0,0,0,0.2);">
     </div>

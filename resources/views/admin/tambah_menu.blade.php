@@ -16,7 +16,7 @@
             <nav class="main-nav">
                 <a href="{{ route('admin.beranda') }}" class="nav-link">Dashboard</a>
                 <a href="{{ route('admin.tambah.menu') }}" class="nav-link active">Tambah Menu</a>
-                <a href="{{ route('admin.beranda') }}" class="nav-link login-btn">Logout</a>
+                <a href="{{ route('admin.logout') }}" class="nav-link">Logout</a>
             </nav>
         </div>
     </header>
@@ -35,8 +35,8 @@
         <form action="{{ route('admin.menu.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="nama_menu">Nama Menu:</label>
-                <input type="text" id="nama_menu" name="nama_menu" required>
+                <label for="nama">Nama Menu:</label>
+                <input type="text" id="nama" name="nama" required>
             </div>
 
             <div class="form-group">
@@ -63,10 +63,10 @@
 
             <div class="form-group">
                 <label for="gambar">Gambar:</label>
-                <input type="file" id="gambar" name="gambar" accept="image/*" required>
+                <input type="file" id="gambar" name="gambar" accept="image/*">
             </div>
 
-            <button type="submit" class="btn btn-add">Simpan</button>
+            <button type="submit" class="btn-add">Simpan Menu</button>
         </form>
     </section>
 

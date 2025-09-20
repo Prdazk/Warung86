@@ -14,10 +14,23 @@
             <h1>Warung Coffee 86</h1>
             <p>Login Admin</p>
         </div>
-        <!-- Form action sudah diarahkan ke route admin.login -->
-        <form action="{{ route('admin.login') }}" method="POST">
+
+        <!-- Pesan error -->
+        @if($errors->any())
+            <div class="alert-error">
+                {{ $errors->first() }}
+            </div>
+        @endif
+
+        <!-- Pesan sukses -->
+        @if(session('success'))
+            <div class="alert-success">{{ session('success') }}</div>
+        @endif
+
+        <!-- Form login admin -->
+        <form action="{{ route('admin.login.post') }}" method="POST">
             @csrf
-            <div class="form-group">
+                    <div class="form-group">
                 <label for="email">Email Admin</label>
                 <input type="email" id="email" name="email" placeholder="Masukkan email" required>
             </div>
@@ -25,16 +38,12 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Masukkan password" required>
             </div>
+
             <button type="submit" class="btn-login">Login</button>
         </form>
 
-        <!-- Tambahkan link kembali ke beranda -->
-        <div class="back-home">
-            <p>Kembali ke Beranda Admin, klik <a href="{{ route('admin.beranda') }}">di sini</a></p>
-        </div>
-
         <div class="login-footer">
-            <p>2025 Warung Coffee 86</p>
+            <p>© 2025 Warung Coffee 86</p>
         </div>
     </div>
 </div>
