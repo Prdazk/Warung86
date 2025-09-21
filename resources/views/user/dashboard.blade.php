@@ -136,55 +136,54 @@
             </section>
 
 
-<section style="margin:50px auto; max-width:900px;">
-  <div style="text-align:center; font-size:28px; font-weight:bold; color:#dbcbb0; margin-bottom:20px;">MENU LAINYA</div>
+        <section style="margin:50px auto; max-width:900px;">
+          <div style="text-align:center; font-size:28px; font-weight:bold; color:#dbcbb0; margin-bottom:20px;">MENU LAINYA</div>
 
-  <div style="background:#4a3f35; border-radius:15px; padding:20px; color:white; display:flex; gap:20px; flex-wrap:wrap; justify-content:flex-start; font-family:monospace;">
-    
-    <!-- Kolom 1 -->
-    <div style="display:flex; flex-direction:column; gap:12px; min-width:150px;">
-      <div><b>1.  Es Teh - 5k</b></div>
-      <div><b>2.  Jus Jeruk - 10K</b></div>
-      <div><b>3.  Jus Mangga - 12k</b></div>
-      <div><b>4.  Jus Apel - 12K</b></div>
-      <div><b>5.  Jus Jambu - 12K</b></div>
-    </div>
+          <div style="background:#4a3f35; border-radius:15px; padding:20px; color:white; display:flex; gap:20px; flex-wrap:wrap; justify-content:flex-start; font-family:monospace;">
+            
+            <!-- Kolom 1 -->
+            <div style="display:flex; flex-direction:column; gap:12px; min-width:150px;">
+              <div><b>1.  Es Teh - 5k</b></div>
+              <div><b>2.  Jus Jeruk - 10K</b></div>
+              <div><b>3.  Jus Mangga - 12k</b></div>
+              <div><b>4.  Jus Apel - 12K</b></div>
+              <div><b>5.  Jus Jambu - 12K</b></div>
+            </div>
 
-    <!-- Kolom 2 -->
-    <div style="display:flex; flex-direction:column; gap:12px; min-width:150px;">
-      <div><b>6.  Jus Strawberry - 15K</b></div>
-      <div><b>7.  Air Mineral - 3K</b></div>
-      <div><b>8.  Es Susu - 10K</b></div>
-      <div><b>9.  Lemon Tea - 8K</b></div>
-      <div><b>10. Chocolate Drink - 15K</b></div>
-    </div>
+            <!-- Kolom 2 -->
+            <div style="display:flex; flex-direction:column; gap:12px; min-width:150px;">
+              <div><b>6.  Jus Strawberry - 15K</b></div>
+              <div><b>7.  Air Mineral - 3K</b></div>
+              <div><b>8.  Es Susu - 10K</b></div>
+              <div><b>9.  Lemon Tea - 8K</b></div>
+              <div><b>10. Chocolate Drink - 15K</b></div>
+            </div>
 
-    <!-- Kolom 3 -->
-    <div style="display:flex; flex-direction:column; gap:12px; min-width:150px;">
-      <div><b>11. Milkshake Vanilla - 18K</b></div>
-      <div><b>12. Milkshake Coklat - 18K</b></div>
-      <div><b>13. Nasi Goreng - 20K</b></div>
-      <div><b>14. Mie Goreng - 18K</b></div>
-      <div><b>15. cilor - 25K</b></div>
-    </div>
+            <!-- Kolom 3 -->
+            <div style="display:flex; flex-direction:column; gap:12px; min-width:150px;">
+              <div><b>11. Milkshake Vanilla - 18K</b></div>
+              <div><b>12. Milkshake Coklat - 18K</b></div>
+              <div><b>13. Nasi Goreng - 20K</b></div>
+              <div><b>14. Mie Goreng - 18K</b></div>
+              <div><b>15. cilor - 25K</b></div>
+            </div>
 
-    <!-- Kolom 4 -->
-    <div style="display:flex; flex-direction:column; gap:12px; min-width:150px;">
-      <div><b>16. Rujak - 15K</b></div>
-    </div>
+            <!-- Kolom 4 -->
+            <div style="display:flex; flex-direction:column; gap:12px; min-width:150px;">
+              <div><b>16. Rujak - 15K</b></div>
+            </div>
 
-  </div>
-</section>
+          </div>
+        </section>
 
-
- <section id="reservasi" class="reservasi-section">
-  <div style="background: #927950; padding: 30px; border-radius: 20px; box-shadow: 0 8px 20px rgba(90,62,43,0.3); max-width: 900px; margin: auto;">
+<section id="reservasi" class="reservasi-section">
+  <div style="background: #927950; padding: 30px; border-radius: 20px; box-shadow: 0 8px 20px rgba(90,62,43,0.3); max-width: 950px; margin: auto;">
     
     <!-- Flex 2 kolom -->
-    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: space-between;">
       
       <!-- FORM RESERVASI -->
-      <div style="flex: 1; background: #4a3f35; padding: 25px; border-radius: 15px; color: #fff; min-height: 520px;">
+      <div style="flex: 1 1 45%; background: #4a3f35; padding: 25px; border-radius: 15px; color: #fff; min-height: 520px;">
         <h2 style="color: #beb5af; margin-bottom: 20px;">Silakan Pilih Meja</h2>
         <form method="POST" action="{{ route('user.reservasi.store') }}">
           @csrf
@@ -225,24 +224,23 @@
             </div>
             <div style="flex: 1;">
               <label>Status</label>
-              <select name="status" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
-                <option value="Menunggu">Menunggu</option>
-                <option value="Dikonfirmasi">Dikonfirmasi</option>
-                <option value="Batal">Batal</option>
+              <select name="status" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c; color:#333; background-color:#fff;">
+                <option value="menunggu" {{ ($reservasi->status ?? '') == 'menunggu' ? 'selected' : '' }}>Menunggu</option>
+                <option value="konfirmasi" {{ ($reservasi->status ?? '') == 'konfirmasi' ? 'selected' : '' }}>Dikonfirmasi</option>
+                <option value="batal" {{ ($reservasi->status ?? '') == 'batal' ? 'selected' : '' }}>Batal</option>
               </select>
             </div>
           </div>
 
           <button type="submit" 
-            style="width: 48%; background: #0a0a0a; color: #9b992f; padding: 12px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.3s;">
+            style="width: 100%; background: #0a0a0a; color: #9b992f; padding: 12px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.3s;">
             Pesan Sekarang
           </button>
         </form>
       </div>
 
-
       <!-- SYARAT & KETENTUAN -->
-      <div style="flex: 1; background: #5a3e2b; padding: 25px; border-radius: 15px; min-height: 520px;">
+      <div style="flex: 1 1 45%; background: #5a3e2b; padding: 25px; border-radius: 15px; min-height: 520px;">
         <h3 style="color: #fff8f0; margin-bottom: 20px;">Syarat & Ketentuan</h3>
         <ul style="text-align: left; color: #fff8f0; line-height: 1.6; padding-left: 20px;">
           <li>Reservasi minimal 45 menit sebelum kedatangan.</li>
@@ -252,14 +250,10 @@
           <li>Pembatalan reservasi dapat dilakukan 2 jam sebelum waktu reservasi.</li>
         </ul>
       </div>
+
     </div>
   </div>
 </section>
-
-
-
-
-
    <section id="lokasi" class="lokasi-section" style="margin-top:50px; text-align:center;">
   <h2 style="color:#b9b4ae; margin-bottom:20px;">Lokasi Kami</h2>
 
@@ -311,7 +305,7 @@
         teman, maupun sekadar melepas penat sambil menikmati kopi hangat.
       </p>
       <p style="font-size:16px; font-weight:bold; color:#f8f8f8;">
-        🌿 Alamat: Taman Lembang, Desa Ngale, Kecamatan Paron, Kabupaten Ngawi, Jawa Timur.
+        Alamat: Taman Lembang, Desa Ngale, Kecamatan pilangkenceng, Kabupaten madiun, Jawa Timur.
       </p>
     </div>
   </div>

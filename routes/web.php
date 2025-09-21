@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\MenuController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\Menu;
 use App\Models\Reservasi;
 use Illuminate\Support\Facades\Hash;
 
@@ -36,6 +37,7 @@ Route::prefix('user')->group(function () {
 // ====================== ADMIN ======================
 Route::prefix('admin')->group(function () {
 
+    // ====================== LOGIN ======================
     // Halaman login admin
     Route::view('login', 'admin.login')->name('admin.login');
 
@@ -56,17 +58,19 @@ Route::prefix('admin')->group(function () {
         return back()->withErrors(['email' => 'Email atau password salah']);
     })->name('admin.login.post');
 
-    // Halaman beranda admin
+    // ====================== BERANDA ======================
     Route::get('beranda', function() {
         if (!session('admin_logged_in')) {
             return redirect()->route('admin.login');
         }
 
         $reservasi = Reservasi::latest()->get();
-        return view('admin.beranda', compact('reservasi'));
+        $menu = Menu::latest()->get();
+        return view('admin.beranda', compact('reservasi','menu'));
     })->name('admin.beranda');
 
-    // Halaman reservasi
+    // ====================== RESERVASI ======================
+    // Halaman reservasi admin (view)
     Route::get('reservasi', function() {
         if (!session('admin_logged_in')) {
             return redirect()->route('admin.login');
@@ -75,6 +79,18 @@ Route::prefix('admin')->group(function () {
         $reservasi = Reservasi::latest()->get();
         return view('admin.reservasi', compact('reservasi'));
     })->name('admin.reservasi');
+
+    // Data reservasi untuk AJAX (realtime)
+    Route::get('reservasi/data', function() {
+        if (!session('admin_logged_in')) {
+            return response()->json([], 401);
+        }
+
+        $reservasi = Reservasi::latest()->get([
+            'id','nama','jumlah_orang','meja','tanggal','jam','status'
+        ]);
+        return response()->json($reservasi);
+    })->name('admin.reservasi.data');
 
     // Hapus reservasi
     Route::delete('reservasi/{id}', function($id){
@@ -87,11 +103,104 @@ Route::prefix('admin')->group(function () {
         return back()->with('success', 'Reservasi berhasil dihapus');
     })->name('admin.reservasi.hapus');
 
-    // Logout admin
+    // ====================== MENU ======================
+    // Halaman menu admin
+    Route::get('menu', function() {
+        if(!session('admin_logged_in')) return redirect()->route('admin.login');
+        $menu = Menu::latest()->get();
+        return view('admin.menu', compact('menu'));
+    })->name('admin.menu');
+
+    Route::get('menu/tambah', function() {
+        if(!session('admin_logged_in')) return redirect()->route('admin.login');
+        return view('admin.menu_tambah');
+    })->name('admin.menu.tambah');
+
+    Route::post('menu/tambah', function(Request $request) {
+        if(!session('admin_logged_in')) return redirect()->route('admin.login');
+
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'harga' => 'required|numeric',
+            'kategori' => 'required|string|max:255',
+            'status' => 'required|in:tersedia,habis',
+            'gambar' => 'nullable|image|max:2048',
+        ]);
+
+        $data = $request->all();
+
+        if($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $path = $file->store('menu', 'public');
+            $data['gambar'] = $path;
+        }
+
+        Menu::create($data);
+
+        return redirect()->route('admin.menu')->with('success','Menu berhasil ditambahkan!');
+    })->name('admin.menu.store');
+
+    Route::get('menu/edit/{id}', function($id) {
+        if(!session('admin_logged_in')) return redirect()->route('admin.login');
+        $menu = Menu::findOrFail($id);
+        return view('admin.menu_edit', compact('menu'));
+    })->name('admin.menu.edit');
+
+    Route::put('menu/edit/{id}', function(Request $request, $id) {
+        if(!session('admin_logged_in')) return redirect()->route('admin.login');
+        $menu = Menu::findOrFail($id);
+
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'harga' => 'required|numeric',
+            'kategori' => 'required|string|max:255',
+            'status' => 'required|in:tersedia,habis',
+            'gambar' => 'nullable|image|max:2048',
+        ]);
+
+        $data = $request->all();
+
+        if($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $path = $file->store('menu', 'public');
+            $data['gambar'] = $path;
+        }
+
+        $menu->update($data);
+
+        return redirect()->route('admin.menu')->with('success','Menu berhasil diupdate!');
+    })->name('admin.menu.update');
+
+    Route::delete('menu/{id}', function($id) {
+        if(!session('admin_logged_in')) return redirect()->route('admin.login');
+        $menu = Menu::findOrFail($id);
+        $menu->delete();
+        return redirect()->route('admin.menu')->with('success','Menu berhasil dihapus!');
+    })->name('admin.menu.hapus');
+
+    Route::delete('menu/hapus_semua', function() {
+        if(!session('admin_logged_in')) return redirect()->route('admin.login');
+        Menu::truncate();
+        return redirect()->route('admin.menu')->with('success','Semua menu berhasil dihapus!');
+    })->name('admin.menu.hapus_semua');
+
+    Route::get('menu/edit_all', function() {
+        if(!session('admin_logged_in')) return redirect()->route('admin.login');
+        $menu = Menu::latest()->get();
+        return view('admin.menu_edit_all', compact('menu'));
+    })->name('admin.menu.edit_all');
+
+    Route::get('menu/data', function() {
+        if(!session('admin_logged_in')) return response()->json([],401);
+        $menu = Menu::latest()->get(['id','nama','harga','kategori','status']);
+        return response()->json($menu);
+    })->name('admin.menu.data');
+
+    // ====================== LOGOUT ======================
     Route::get('logout', function() {
         session()->forget('admin_logged_in');
         session()->forget('admin_id');
         return redirect()->route('admin.login');
     })->name('admin.logout');
 
-});
+}); 

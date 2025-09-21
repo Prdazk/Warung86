@@ -13,13 +13,13 @@ class AdminSeeder extends Seeder
         // Admin pertama
         Admin::create([
             'email' => 'laduni@gmail.com',
-            'password' => Hash::make('123'), // password admin
+            'password' => Hash::make('1'), // password admin = 1
         ]);
 
         // Admin kedua
         Admin::create([
             'email' => 'admin2@gmail.com',
-            'password' => Hash::make('123'), // password admin kedua
+            'password' => Hash::make('1'), // password admin kedua = 1
         ]);
     }
 }

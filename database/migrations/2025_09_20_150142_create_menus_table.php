@@ -10,10 +10,10 @@ return new class extends Migration {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('kategori');
-            $table->integer('harga');
-            $table->string('status')->default('tersedia'); // tersedia / habis
-            $table->string('gambar')->nullable();
+            $table->string('kategori')->nullable();
+            $table->decimal('harga', 10, 2);
+            $table->enum('status', ['tersedia', 'habis'])->default('tersedia'); // hanya tersedia / habis
+            $table->string('gambar')->nullable(); // menyimpan path gambar
             $table->timestamps();
         });
     }

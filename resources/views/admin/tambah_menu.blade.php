@@ -15,7 +15,7 @@
             <a href="{{ route('admin.beranda') }}" class="logo">COFFEE 86</a>
             <nav class="main-nav">
                 <a href="{{ route('admin.beranda') }}" class="nav-link">Dashboard</a>
-                <a href="{{ route('admin.tambah.menu') }}" class="nav-link active">Tambah Menu</a>
+                <a href="{{ route('admin.menu.tambah') }}" class="nav-link active">Tambah Menu</a>
                 <a href="{{ route('admin.logout') }}" class="nav-link">Logout</a>
             </nav>
         </div>
@@ -32,32 +32,43 @@
             </div>
         @endif
 
+        <!-- Pesan error -->
+        @if($errors->any())
+            <div class="alert-error">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form action="{{ route('admin.menu.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="nama">Nama Menu:</label>
-                <input type="text" id="nama" name="nama" required>
+                <input type="text" id="nama" name="nama" value="{{ old('nama') }}" required>
             </div>
 
             <div class="form-group">
                 <label for="kategori">Kategori:</label>
                 <select id="kategori" name="kategori" required>
-                    <option value="Kopi">Kopi</option>
-                    <option value="Non Kopi">Non Kopi</option>
-                    <option value="Snack">Snack</option>
+                    <option value="Kopi" {{ old('kategori')=='Kopi' ? 'selected':'' }}>Kopi</option>
+                    <option value="Non Kopi" {{ old('kategori')=='Non Kopi' ? 'selected':'' }}>Non Kopi</option>
+                    <option value="Snack" {{ old('kategori')=='Snack' ? 'selected':'' }}>Snack</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="harga">Harga:</label>
-                <input type="number" id="harga" name="harga" required>
+                <input type="number" id="harga" name="harga" value="{{ old('harga') }}" required>
             </div>
 
             <div class="form-group">
                 <label for="status">Status:</label>
                 <select id="status" name="status" required>
-                    <option value="Tersedia">Tersedia</option>
-                    <option value="Habis">Habis</option>
+                    <option value="tersedia" {{ old('status')=='tersedia' ? 'selected':'' }}>Tersedia</option>
+                    <option value="habis" {{ old('status')=='habis' ? 'selected':'' }}>Habis</option>
                 </select>
             </div>
 

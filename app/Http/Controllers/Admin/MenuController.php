@@ -11,47 +11,77 @@ class MenuController extends Controller
     // Tampilkan daftar menu
     public function index()
     {
-        $menus = Menu::orderBy('nama')->get();
-        return view('admin.menu', ['menu' => $menus]); // pakai $menu di view
+        $menu = Menu::all();
+        return view('admin.menu.index', compact('menu'));
     }
 
     // Form tambah menu
     public function create()
     {
-        return view('admin.tambah_menu');
+        return view('admin.menu.create');
     }
 
     // Simpan menu baru
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $request->validate([
             'nama' => 'required|string|max:255',
-            'kategori' => 'required|string|max:50',
+            'kategori' => 'nullable|string|max:255',
             'harga' => 'required|numeric',
-            'status' => 'required|string|max:20',
-            'gambar' => 'nullable|image|max:2048'
+            'status' => 'required|in:tersedia,habis',
+            'gambar' => 'nullable|image|max:2048',
         ]);
 
-        if($request->hasFile('gambar')){
-            $data['gambar'] = $request->file('gambar')->storeAs('images', time().'_'.$request->file('gambar')->getClientOriginalName(), 'public');
+        $menu = new Menu();
+        $menu->nama = $request->nama;
+        $menu->kategori = $request->kategori;
+        $menu->harga = $request->harga;
+        $menu->status = $request->status;
+
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $path = $file->store('menu', 'public');
+            $menu->gambar = $path;
         }
 
-        Menu::create($data);
+        $menu->save();
 
         return redirect()->route('admin.menu.index')->with('success', 'Menu berhasil ditambahkan!');
     }
 
-    // Hapus menu
-    public function destroy($id)
+    // Form edit menu
+    public function edit(Menu $menu)
     {
-        $menu = Menu::find($id);
-        if(!$menu) return redirect()->route('admin.menu.index')->with('error', 'Menu tidak ditemukan');
+        return view('admin.menu.edit', compact('menu'));
+    }
 
-        if($menu->gambar && file_exists(public_path('images/'.$menu->gambar))){
-            unlink(public_path('images/'.$menu->gambar));
+    // Update menu
+    public function update(Request $request, Menu $menu)
+    {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'kategori' => 'nullable|string|max:255',
+            'harga' => 'required|numeric',
+            'status' => 'required|in:tersedia,habis',
+            'gambar' => 'nullable|image|max:2048',
+        ]);
+
+        $menu->update($request->only('nama', 'kategori', 'harga', 'status'));
+
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $path = $file->store('menu', 'public');
+            $menu->gambar = $path;
+            $menu->save();
         }
 
+        return redirect()->route('admin.menu.index')->with('success', 'Menu berhasil diperbarui!');
+    }
+
+    // Hapus menu
+    public function destroy(Menu $menu)
+    {
         $menu->delete();
-        return redirect()->route('admin.menu.index')->with('success', 'Menu berhasil dihapus');
+        return redirect()->route('admin.menu.index')->with('success', 'Menu berhasil dihapus!');
     }
 }
