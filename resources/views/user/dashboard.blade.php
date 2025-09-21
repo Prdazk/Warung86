@@ -183,7 +183,7 @@
     <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: space-between;">
       
       <!-- FORM RESERVASI -->
-      <div style="flex: 1 1 45%; background: #4a3f35; padding: 25px; border-radius: 15px; color: #fff; min-height: 520px;">
+      <div style="flex: 1 1 45%; background: #4a3f35; padding: 25px; border-radius: 15px; color: #c49a6c; min-height: 520px;">
         <h2 style="color: #beb5af; margin-bottom: 20px;">Silakan Pilih Meja</h2>
         <form method="POST" action="{{ route('user.reservasi.store') }}">
           @csrf
@@ -224,7 +224,7 @@
             </div>
             <div style="flex: 1;">
               <label>Status</label>
-              <select name="status" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c; color:#333; background-color:#fff;">
+              <select name="status" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c; color:#333; background-color:#c49a6c;">
                 <option value="menunggu" {{ ($reservasi->status ?? '') == 'menunggu' ? 'selected' : '' }}>Menunggu</option>
                 <option value="konfirmasi" {{ ($reservasi->status ?? '') == 'konfirmasi' ? 'selected' : '' }}>Dikonfirmasi</option>
                 <option value="batal" {{ ($reservasi->status ?? '') == 'batal' ? 'selected' : '' }}>Batal</option>

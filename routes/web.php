@@ -8,6 +8,8 @@ use App\Models\Admin;
 use App\Models\Menu;
 use App\Models\Reservasi;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Auth\GoogleController;
+
 
 // ====================== DEFAULT ======================
 Route::redirect('/', '/user/dashboard');
@@ -37,26 +39,35 @@ Route::prefix('user')->group(function () {
 // ====================== ADMIN ======================
 Route::prefix('admin')->group(function () {
 
-    // ====================== LOGIN ======================
-    // Halaman login admin
-    Route::view('login', 'admin.login')->name('admin.login');
+  // ====================== LOGIN ======================
 
-    // Proses login admin
-    Route::post('login', function(Request $req){
-        $req->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
+// Halaman login admin (form login biasa)
+Route::view('login', 'admin.login')->name('admin.login');
 
-        $admin = Admin::where('email', $req->email)->first();
+// Proses login admin (menggunakan email dan password)
+Route::post('login', function(Request $req){
+    $req->validate([
+        'email' => 'required|email',
+        'password' => 'required'
+    ]);
 
-        if($admin && Hash::check($req->password, $admin->password)){
-            session(['admin_logged_in' => true, 'admin_id' => $admin->id]);
-            return redirect()->route('admin.beranda');
-        }
+    $admin = Admin::where('email', $req->email)->first();
 
-        return back()->withErrors(['email' => 'Email atau password salah']);
-    })->name('admin.login.post');
+    if ($admin && Hash::check($req->password, $admin->password)) {
+        session(['admin_logged_in' => true, 'admin_id' => $admin->id]);
+        return redirect()->route('admin.beranda');
+    }
+
+    return back()->withErrors(['email' => 'Email atau password salah']);
+})->name('admin.login.post');
+
+// ====================== LOGIN GOOGLE ======================
+
+// Route untuk login menggunakan Google
+Route::get('login/google', [GoogleController::class, 'redirectToGoogle'])->name('admin.login.google');
+
+// Callback setelah login dengan Google
+Route::get('login/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('admin.login.google.callback');
 
     // ====================== BERANDA ======================
     Route::get('beranda', function() {
@@ -103,104 +114,113 @@ Route::prefix('admin')->group(function () {
         return back()->with('success', 'Reservasi berhasil dihapus');
     })->name('admin.reservasi.hapus');
 
-    // ====================== MENU ======================
-    // Halaman menu admin
-    Route::get('menu', function() {
-        if(!session('admin_logged_in')) return redirect()->route('admin.login');
-        $menu = Menu::latest()->get();
-        return view('admin.menu', compact('menu'));
-    })->name('admin.menu');
+   // ====================== MENU ======================
 
-    Route::get('menu/tambah', function() {
-        if(!session('admin_logged_in')) return redirect()->route('admin.login');
-        return view('admin.menu_tambah');
-    })->name('admin.menu.tambah');
+// Halaman menu admin
+Route::get('menu', function() {
+    if(!session('admin_logged_in')) return redirect()->route('admin.login');
+    $menu = Menu::latest()->get();
+    return view('admin.menu', compact('menu'));
+})->name('admin.menu');
 
-    Route::post('menu/tambah', function(Request $request) {
-        if(!session('admin_logged_in')) return redirect()->route('admin.login');
+// Halaman form tambah menu
+Route::get('menu/tambah', function() {
+    if(!session('admin_logged_in')) return redirect()->route('admin.login');
+    return view('admin.tambah_menu'); // <<< ganti ke tambah_menu.blade.php
+})->name('admin.menu.tambah');
 
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'harga' => 'required|numeric',
-            'kategori' => 'required|string|max:255',
-            'status' => 'required|in:tersedia,habis',
-            'gambar' => 'nullable|image|max:2048',
-        ]);
+// Proses simpan menu
+Route::post('menu/tambah', function(Request $request) {
+    if(!session('admin_logged_in')) return redirect()->route('admin.login');
 
-        $data = $request->all();
+    $request->validate([
+        'nama' => 'required|string|max:255',
+        'harga' => 'required|numeric',
+        'kategori' => 'required|string|max:255',
+        'status' => 'required|in:tersedia,habis',
+        'gambar' => 'nullable|image|max:2048',
+    ]);
 
-        if($request->hasFile('gambar')) {
-            $file = $request->file('gambar');
-            $path = $file->store('menu', 'public');
-            $data['gambar'] = $path;
-        }
+    $data = $request->only(['nama','harga','kategori','status']);
 
-        Menu::create($data);
+    if($request->hasFile('gambar')) {
+        $file = $request->file('gambar');
+        $path = $file->store('menu', 'public');
+        $data['gambar'] = $path;
+    }
 
-        return redirect()->route('admin.menu')->with('success','Menu berhasil ditambahkan!');
-    })->name('admin.menu.store');
+    Menu::create($data);
 
-    Route::get('menu/edit/{id}', function($id) {
-        if(!session('admin_logged_in')) return redirect()->route('admin.login');
-        $menu = Menu::findOrFail($id);
-        return view('admin.menu_edit', compact('menu'));
-    })->name('admin.menu.edit');
+    return redirect()->route('admin.menu')->with('success','Menu berhasil ditambahkan!');
+})->name('admin.menu.store');
 
-    Route::put('menu/edit/{id}', function(Request $request, $id) {
-        if(!session('admin_logged_in')) return redirect()->route('admin.login');
-        $menu = Menu::findOrFail($id);
+// Form edit menu
+Route::get('menu/edit/{id}', function($id) {
+    if(!session('admin_logged_in')) return redirect()->route('admin.login');
+    $menu = Menu::findOrFail($id);
+    return view('admin.menu_edit', compact('menu'));
+})->name('admin.menu.edit');
 
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'harga' => 'required|numeric',
-            'kategori' => 'required|string|max:255',
-            'status' => 'required|in:tersedia,habis',
-            'gambar' => 'nullable|image|max:2048',
-        ]);
+// Proses update menu
+Route::put('menu/edit/{id}', function(Request $request, $id) {
+    if(!session('admin_logged_in')) return redirect()->route('admin.login');
+    $menu = Menu::findOrFail($id);
 
-        $data = $request->all();
+    $request->validate([
+        'nama' => 'required|string|max:255',
+        'harga' => 'required|numeric',
+        'kategori' => 'required|string|max:255',
+        'status' => 'required|in:tersedia,habis',
+        'gambar' => 'nullable|image|max:2048',
+    ]);
 
-        if($request->hasFile('gambar')) {
-            $file = $request->file('gambar');
-            $path = $file->store('menu', 'public');
-            $data['gambar'] = $path;
-        }
+    $data = $request->only(['nama','harga','kategori','status']);
 
-        $menu->update($data);
+    if($request->hasFile('gambar')) {
+        $file = $request->file('gambar');
+        $path = $file->store('menu', 'public');
+        $data['gambar'] = $path;
+    }
 
-        return redirect()->route('admin.menu')->with('success','Menu berhasil diupdate!');
-    })->name('admin.menu.update');
+    $menu->update($data);
 
-    Route::delete('menu/{id}', function($id) {
-        if(!session('admin_logged_in')) return redirect()->route('admin.login');
-        $menu = Menu::findOrFail($id);
-        $menu->delete();
-        return redirect()->route('admin.menu')->with('success','Menu berhasil dihapus!');
-    })->name('admin.menu.hapus');
+    return redirect()->route('admin.menu')->with('success','Menu berhasil diupdate!');
+})->name('admin.menu.update');
 
-    Route::delete('menu/hapus_semua', function() {
-        if(!session('admin_logged_in')) return redirect()->route('admin.login');
-        Menu::truncate();
-        return redirect()->route('admin.menu')->with('success','Semua menu berhasil dihapus!');
-    })->name('admin.menu.hapus_semua');
+// Hapus satu menu
+Route::delete('menu/{id}', function($id) {
+    if(!session('admin_logged_in')) return redirect()->route('admin.login');
+    $menu = Menu::findOrFail($id);
+    $menu->delete();
+    return redirect()->route('admin.menu')->with('success','Menu berhasil dihapus!');
+})->name('admin.menu.hapus');
 
-    Route::get('menu/edit_all', function() {
-        if(!session('admin_logged_in')) return redirect()->route('admin.login');
-        $menu = Menu::latest()->get();
-        return view('admin.menu_edit_all', compact('menu'));
-    })->name('admin.menu.edit_all');
+// Hapus semua menu
+Route::delete('menu/hapus_semua', function() {
+    if(!session('admin_logged_in')) return redirect()->route('admin.login');
+    Menu::truncate();
+    return redirect()->route('admin.menu')->with('success','Semua menu berhasil dihapus!');
+})->name('admin.menu.hapus_semua');
 
-    Route::get('menu/data', function() {
-        if(!session('admin_logged_in')) return response()->json([],401);
-        $menu = Menu::latest()->get(['id','nama','harga','kategori','status']);
-        return response()->json($menu);
-    })->name('admin.menu.data');
+// Edit semua menu
+Route::get('menu/edit_all', function() {
+    if(!session('admin_logged_in')) return redirect()->route('admin.login');
+    $menu = Menu::latest()->get();
+    return view('admin.menu_edit_all', compact('menu'));
+})->name('admin.menu.edit_all');
 
-    // ====================== LOGOUT ======================
-    Route::get('logout', function() {
-        session()->forget('admin_logged_in');
-        session()->forget('admin_id');
-        return redirect()->route('admin.login');
-    })->name('admin.logout');
+// Data menu untuk JSON
+Route::get('menu/data', function() {
+    if(!session('admin_logged_in')) return response()->json([],401);
+    $menu = Menu::latest()->get(['id','nama','harga','kategori','status']);
+    return response()->json($menu);
+})->name('admin.menu.data');
+// ====================== LOGOUT ======================
+Route::get('logout', function() {
+    session()->forget('admin_logged_in');
+    session()->forget('admin_id');
+    return redirect()->route('admin.login');
+})->name('admin.logout');
 
-}); 
+
+});

@@ -30,7 +30,7 @@
         <!-- Form login admin -->
         <form action="{{ route('admin.login.post') }}" method="POST">
             @csrf
-                    <div class="form-group">
+            <div class="form-group">
                 <label for="email">Email Admin</label>
                 <input type="email" id="email" name="email" placeholder="Masukkan email" required>
             </div>
@@ -41,6 +41,13 @@
 
             <button type="submit" class="btn-login">Login</button>
         </form>
+
+        <!-- Tombol login Google -->
+        <div class="login-google">
+            <a href="{{ url('login/google') }}" class="btn-google">
+                Login with Google
+            </a>
+        </div>
 
         <div class="login-footer">
             <p>© 2025 Warung Coffee 86</p>

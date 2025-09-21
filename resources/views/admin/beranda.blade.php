@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Warung Coffee 86 - Admin</title>
     <link rel="stylesheet" href="{{ asset('css/admin/beranda.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/admin/servasi.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/menu.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/vasi.css') }}">
 </head>
 <body>
     <div class="page-wrapper">
@@ -39,72 +40,85 @@
             </div>
         </section>
 
-        <!-- Menu Section -->
-@php
-    $menu = $menu ?? collect();
-@endphp
-<section id="menu" style="margin-bottom:30px; display:flex; justify-content:center;">
-    <div style="max-width:900px; width:100%;">
-        <h2 style="margin-bottom:10px; color:#cac6c5; font-size:1.3em; text-align:center;">Daftar Menu Masuk</h2>
+ 
+       <!-- Menu Section -->
+<section id="menu">
+  <div class="menu-wrapper">
+    <h2 style="text-align:center;">Daftar Menu Masuk</h2>
 
-        <!-- Tombol aksi -->
-        <div style="margin-bottom:10px; text-align:right;">
-            <a href="{{ route('admin.menu.tambah') }}" style="padding:6px 12px; background:#8D6E63; color:white; border:none; border-radius:4px; text-decoration:none; margin-right:5px;">Tambah Data</a>
-            <a href="{{ route('admin.menu.edit_all') }}" style="padding:6px 12px; background:#6D4C41; color:white; border:none; border-radius:4px; text-decoration:none; margin-right:5px;">Edit Data</a>
-            <form action="{{ route('admin.menu.hapus_semua') }}" method="POST" style="display:inline;">
+    <!-- Tombol aksi -->
+    <div class="menu-actions">
+      <a href="{{ route('admin.menu.tambah') }}" class="btn btn-add">Tambah Data</a>
+      <a href="{{ route('admin.menu.edit_all') }}" class="btn btn-edit">Edit Semua</a>
+    </div>
+
+    <div class="menu-table-container">
+      <table class="menu-table">
+        <thead>
+          <tr>
+            <th>No</th> <!-- Kolom nomor baru -->
+            <th>Gambar</th>
+            <th>Nama</th>
+            <th>Harga</th>
+            <th>Kategori</th>
+            <th>Status</th>
+            <th class="col-settings" aria-label="Pengaturan">
+              <span class="gear">⚙️</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody id="menu-body">
+          @forelse($menu as $m)
+            <tr>
+              <td>{{ $loop->iteration }}</td> <!-- Nomor otomatis -->
+              <td>
+                @if($m->gambar)
+                  <img src="{{ asset('storage/menu/' . $m->gambar) }}" alt="{{ $m->nama }}" style="width:60px; height:60px; object-fit:cover; border-radius:6px;">
+                @else
+                  <span style="color:#aaa; font-size:0.85em;">Tidak ada</span>
+                @endif
+              </td>
+              <td>{{ $m->nama }}</td>
+              <td>Rp {{ number_format($m->harga,0,',','.') }}</td>
+              <td>{{ $m->kategori }}</td>
+              <td>
+                @if($m->status === 'tersedia')
+                  <span class="status tersedia">Tersedia</span>
+                @else
+                  <span class="status habis">Habis</span>
+                @endif
+              </td>
+              <td>
+            <form action="{{ route('admin.menu.hapus', $m->id) }}" method="POST" style="display:inline;">
                 @csrf
                 @method('DELETE')
-                <button type="submit" style="padding:6px 12px; background:#B71C1C; color:white; border:none; border-radius:4px; cursor:pointer;" onclick="return confirm('Yakin ingin hapus semua menu?')">Hapus Semua</button>
-            </form>
-        </div>
+                <button type="submit"
+                        onclick="return confirm('Yakin ingin hapus menu ini?')"
+                        class="btn btn-delete">
+                    Hapus
+                </button>
+                </form>
 
-        <div style="overflow-x:auto; border:1px solid #D7CCC8; border-radius:6px; background:#6D4C41;">
-            <table style="width:100%; border-collapse:collapse; text-align:left; color:white; font-size:0.9em;">
-                <thead>
-                    <tr style="background:#5D4037;">
-                        <th style="padding:6px 8px; border-bottom:1px solid #D7CCC8;">Nama</th>
-                        <th style="padding:6px 8px; border-bottom:1px solid #D7CCC8;">Harga</th>
-                        <th style="padding:6px 8px; border-bottom:1px solid #D7CCC8;">Kategori</th>
-                        <th style="padding:6px 8px; border-bottom:1px solid #D7CCC8;">Status</th>
-                        <th style="padding:6px 8px; border-bottom:1px solid #D7CCC8;">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody id="menu-body">
-                    @forelse($menu as $m)
-                        <tr>
-                            <td style="padding:5px 8px; border-bottom:1px solid #D7CCC8;">{{ $m->nama }}</td>
-                            <td style="padding:5px 8px; border-bottom:1px solid #D7CCC8;">{{ number_format($m->harga,0,',','.') }}</td>
-                            <td style="padding:5px 8px; border-bottom:1px solid #D7CCC8;">{{ $m->kategori }}</td>
-                            <td style="padding:5px 8px; border-bottom:1px solid #D7CCC8;">
-                                @if($m->status === 'tersedia')
-                                    <span style="color:#FFF176; font-weight:bold;">Tersedia</span>
-                                @else
-                                    <span style="color:#FF8A65; font-weight:bold;">Habis</span>
-                                @endif
-                            </td>
-                            <td style="padding:5px 8px; border-bottom:1px solid #D7CCC8;">
-                                <a href="{{ route('admin.menu.edit', $m->id) }}" style="padding:4px 8px; background:#6D4C41; color:white; border-radius:3px; text-decoration:none; margin-right:3px;">Edit</a>
-                                <form action="{{ route('admin.menu.hapus', $m->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" style="padding:4px 8px; background:#B71C1C; color:white; border:none; border-radius:3px; cursor:pointer;" onclick="return confirm('Yakin ingin hapus menu ini?')">Hapus</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="5" style="padding:8px; font-style:italic; text-align:center; color:#D7CCC8;">Belum ada menu</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
+
+              </td>
+            </tr>
+          @empty
+            <tr>
+              <td colspan="7" class="no-data">Belum ada menu</td> <!-- colspan disesuaikan -->
+            </tr>
+          @endforelse
+        </tbody>
+      </table>
     </div>
+  </div>
 </section>
+
+
+
        <!-- Tambahkan meta CSRF di <head> -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Reservasi Section -->
+ <!-- Reservasi Section -->
 @php
     $reservasi = $reservasi ?? collect();
 @endphp
@@ -114,31 +128,27 @@
     <table>
         <thead>
             <tr>
+                <th>No</th>
                 <th>Nama</th>
                 <th>Jumlah</th>
                 <th>Meja</th>
                 <th>Tanggal</th>
                 <th>Jam</th>
-                <th>Status</th>
-                <th>Aksi</th>
+                <th class="col-settings" aria-label="Pengaturan">
+                    <span class="gear" style="font-size:24px;">⚙️</span>
+                </th>
             </tr>
         </thead>
         <tbody id="reservasi-body">
             @forelse($reservasi as $r)
                 <tr>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $r->nama }}</td>
                     <td>{{ $r->jumlah_orang }}</td>
                     <td>{{ $r->meja ?? '-' }}</td>
                     <td>{{ $r->tanggal }}</td>
                     <td>{{ $r->jam }}</td>
                     <td>
-                        <select class="status-reservasi" data-id="{{ $r->id }}" style="padding:5px 8px;border-radius:5px;border:1px solid #c49a6c;">
-                            <option value="menunggu" {{ $r->status == 'menunggu' ? 'selected' : '' }}>Menunggu</option>
-                            <option value="konfirmasi" {{ $r->status == 'konfirmasi' ? 'selected' : '' }}>Dikonfirmasi</option>
-                            <option value="batal" {{ $r->status == 'batal' ? 'selected' : '' }}>Batal</option>
-                        </select>
-                    </td>
-                   <td>
                         <button class="btn-delete-reservasi" data-id="{{ $r->id }}" style="background-color:#e74c3c;color:white;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;">Hapus</button>
                     </td>
                 </tr>
@@ -160,23 +170,18 @@
         $.get("{{ route('admin.reservasi.data') }}", function(data) {
             let tbody = '';
             if(data.length > 0){
-                data.forEach(r => {
+                data.forEach((r, index) => {
                     let meja = r.meja ? r.meja : '-';
                     tbody += `
                         <tr>
+                            <td>${index + 1}</td>
                             <td>${r.nama}</td>
                             <td>${r.jumlah_orang}</td>
                             <td>${meja}</td>
                             <td>${r.tanggal}</td>
                             <td>${r.jam}</td>
                             <td>
-                                <select class="status-reservasi" data-id="${r.id}" style="padding:5px 8px;border-radius:5px;border:1px solid #c49a6c;">
-                                    <option value="menunggu" ${r.status === 'menunggu' ? 'selected' : ''}>Menunggu</option>
-                                    <option value="konfirmasi" ${r.status === 'konfirmasi' ? 'selected' : ''}>Dikonfirmasi</option>
-                                    <option value="batal" ${r.status === 'batal' ? 'selected' : ''}>Batal</option>
-                                </select>
-                            </td>
-                            <td>
+                                <button class="btn-edit-reservasi" data-id="${r.id}" style="background-color:#3498db;color:white;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;margin-right:5px;">Edit</button>
                                 <button class="btn-delete-reservasi" data-id="${r.id}" style="background-color:#e74c3c;color:white;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;">Hapus</button>
                             </td>
                         </tr>
@@ -198,7 +203,6 @@
     // Hapus reservasi via AJAX
     $(document).on('click', '.btn-delete-reservasi', function(){
         if(!confirm('Yakin ingin hapus reservasi ini?')) return;
-
         let id = $(this).data('id');
         $.ajax({
             url: `/admin/reservasi/${id}`,
@@ -213,34 +217,11 @@
         });
     });
 
-    // Update status reservasi via AJAX
-    $(document).on('change', '.status-reservasi', function(){
+    // Edit reservasi (contoh alert, bisa diganti modal atau redirect)
+    $(document).on('click', '.btn-edit-reservasi', function(){
         let id = $(this).data('id');
-        let status = $(this).val();
-
-        $.ajax({
-            url: `/admin/reservasi/${id}/status`,
-            type: 'PATCH',
-            data: {_token: csrfToken, status: status},
-            success: function(){
-                console.log('Status berhasil diupdate');
-                loadReservasi(); // reload data
-            },
-            error: function(){
-                alert('Gagal update status. Refresh halaman dan coba lagi.');
-            }
-        });
-    });
-
-    // Smooth scroll
-    $(document).ready(function(){
-        $('a[href^="#"]').on('click', function(e){
-            e.preventDefault();
-            let target = $(this).attr('href');
-            $('html, body').animate({
-                scrollTop: $(target).offset().top - 60
-            }, 800);
-        });
+        // bisa redirect ke halaman edit, contoh:
+        window.location.href = `/admin/reservasi/${id}/edit`;
     });
 </script>
 
