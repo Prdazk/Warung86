@@ -55,7 +55,7 @@
                 </article>
 
                 <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <img src="{{ asset('images/seduh.jpg') }}" alt="Mexican" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
+                    <img src="{{ asset('images/enak.jpg') }}" alt="Mexican" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
                     <h3>Rujak Petis</h3>
                     <p>Balanced and flavorful.</p>
                     <p class="menu-item-price">$19.99</p>
@@ -88,7 +88,7 @@
                 </article>
 
                 <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <img src="{{ asset('images/seduh.jpg') }}" alt="Mocha" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
+                    <img src="{{ asset('images/enak.jpg') }}" alt="Mocha" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
                     <h3>Krupuk Pecel</h3>
                     <p>Chocolate infused.</p>
                     <p class="menu-item-price">$22.99</p>
@@ -121,7 +121,7 @@
                 </article>
 
                 <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <img src="{{ asset('images/seduh.jpg') }}" alt="Macchiato" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
+                    <img src="{{ asset('images/enak.jpg') }}" alt="Macchiato" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
                     <h3>Ayam Goreng</h3>
                     <p>Bold with foam.</p>
                     <p class="menu-item-price">$21.99</p>
@@ -135,46 +135,6 @@
             </div>
             </section>
 
-
-        <section style="margin:50px auto; max-width:900px;">
-          <div style="text-align:center; font-size:28px; font-weight:bold; color:#dbcbb0; margin-bottom:20px;">MENU LAINYA</div>
-
-          <div style="background:#4a3f35; border-radius:15px; padding:20px; color:white; display:flex; gap:20px; flex-wrap:wrap; justify-content:flex-start; font-family:monospace;">
-            
-            <!-- Kolom 1 -->
-            <div style="display:flex; flex-direction:column; gap:12px; min-width:150px;">
-              <div><b>1.  Es Teh - 5k</b></div>
-              <div><b>2.  Jus Jeruk - 10K</b></div>
-              <div><b>3.  Jus Mangga - 12k</b></div>
-              <div><b>4.  Jus Apel - 12K</b></div>
-              <div><b>5.  Jus Jambu - 12K</b></div>
-            </div>
-
-            <!-- Kolom 2 -->
-            <div style="display:flex; flex-direction:column; gap:12px; min-width:150px;">
-              <div><b>6.  Jus Strawberry - 15K</b></div>
-              <div><b>7.  Air Mineral - 3K</b></div>
-              <div><b>8.  Es Susu - 10K</b></div>
-              <div><b>9.  Lemon Tea - 8K</b></div>
-              <div><b>10. Chocolate Drink - 15K</b></div>
-            </div>
-
-            <!-- Kolom 3 -->
-            <div style="display:flex; flex-direction:column; gap:12px; min-width:150px;">
-              <div><b>11. Milkshake Vanilla - 18K</b></div>
-              <div><b>12. Milkshake Coklat - 18K</b></div>
-              <div><b>13. Nasi Goreng - 20K</b></div>
-              <div><b>14. Mie Goreng - 18K</b></div>
-              <div><b>15. cilor - 25K</b></div>
-            </div>
-
-            <!-- Kolom 4 -->
-            <div style="display:flex; flex-direction:column; gap:12px; min-width:150px;">
-              <div><b>16. Rujak - 15K</b></div>
-            </div>
-
-          </div>
-        </section>
 
 <section id="reservasi" class="reservasi-section">
   <div style="background: #927950; padding: 30px; border-radius: 20px; box-shadow: 0 8px 20px rgba(90,62,43,0.3); max-width: 950px; margin: auto;">

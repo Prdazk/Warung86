@@ -35,7 +35,7 @@
                     <a href="#reservasi" class="hero-cta">Lihat Reservasi</a>
                 </div>
                 <div class="hero-image">
-                    <img src="{{ asset('images/grup.png') }}" alt="Admin Dashboard">
+                    <img src="{{ asset('images/kopi1.png') }}" alt="Admin Dashboard">
                 </div>
             </div>
         </section>
@@ -149,7 +149,7 @@
                     <td>{{ $r->tanggal }}</td>
                     <td>{{ $r->jam }}</td>
                     <td>
-                        <button class="btn-delete-reservasi" data-id="{{ $r->id }}" style="background-color:#e74c3c;color:white;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;">Hapus</button>
+                        <button class="btn-delete-reservasi" data-id="{{ $r->id }}" style="background-color:#e72f1b;color:white;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;">Hapus</button>
                     </td>
                 </tr>
             @empty
