@@ -10,6 +10,6 @@ class Reservasi extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama', 'no_hp', 'jumlah_orang', 'tanggal', 'jam', 'pilihan_meja', 'status'
+        'nama', 'jumlah_orang', 'pilihan_meja', 'tanggal', 'jam', 'catatan'
     ];
 }

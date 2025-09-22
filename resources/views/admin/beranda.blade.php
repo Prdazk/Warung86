@@ -119,21 +119,23 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
  <!-- Reservasi Section -->
-@php
+
+  @php
     $reservasi = $reservasi ?? collect();
 @endphp
 
 <section id="reservasi">
     <h2>Daftar Reservasi Masuk</h2>
-    <table>
+    <table style="width:100%; border-collapse: collapse;">
         <thead>
-            <tr>
+            <tr style="background-color:#927950; color:#fff;">
                 <th>No</th>
                 <th>Nama</th>
                 <th>Jumlah</th>
                 <th>Meja</th>
                 <th>Tanggal</th>
                 <th>Jam</th>
+                <th>Catatan</th>
                 <th class="col-settings" aria-label="Pengaturan">
                     <span class="gear" style="font-size:24px;">⚙️</span>
                 </th>
@@ -145,85 +147,120 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $r->nama }}</td>
                     <td>{{ $r->jumlah_orang }}</td>
-                    <td>{{ $r->meja ?? '-' }}</td>
+                    <td>{{ $r->pilihan_meja ?? '-' }}</td>
                     <td>{{ $r->tanggal }}</td>
                     <td>{{ $r->jam }}</td>
+                    <td>{{ $r->catatan ? 'Ada catatan' : '-' }}</td>
                     <td>
-                        <button class="btn-delete-reservasi" data-id="{{ $r->id }}" style="background-color:#e72f1b;color:white;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;">Hapus</button>
+                     <button class="btn-view-reservasi" 
+                            data-id="{{ $r->id }}" 
+                            data-nama="{{ $r->nama }}" 
+                            data-jumlah="{{ $r->jumlah_orang }}" 
+                            data-meja="{{ $r->pilihan_meja ?? '-' }}"
+                            data-tanggal="{{ $r->tanggal }}" 
+                            data-jam="{{ $r->jam }}" 
+                            data-catatan="{{ $r->catatan ?? '-' }}" 
+                            style="background-color:#f1c40f;color:white;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;margin-right:5px;">
+                        Lihat
+                    </button>
+
+                    <button class="btn-delete-reservasi" 
+                            data-id="{{ $r->id }}" 
+                            style="background-color:#e74c3c;color:white;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;">
+                        Hapus
+                    </button>
+
                     </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="7" style="font-style:italic; color:#666;">Belum ada reservasi</td>
+                    <td colspan="8" style="font-style:italic; color:#666;">Belum ada reservasi</td>
                 </tr>
             @endforelse
         </tbody>
     </table>
 </section>
 
+<!-- Modal Lihat Reservasi -->
+<div id="modal-view" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center;">
+    <div style="background:#927950; padding:20px; border-radius:10px; width:400px; max-width:90%; position:relative;">
+        <span id="modal-close" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:18px;">&times;</span>
+        <h3>Detail Reservasi</h3>
+        <p><strong>Nama:</strong> <span id="view-nama"></span></p>
+        <p><strong>Jumlah Orang:</strong> <span id="view-jumlah"></span></p>
+        <p><strong>Meja:</strong> <span id="view-meja"></span></p>
+        <p><strong>Tanggal:</strong> <span id="view-tanggal"></span></p>
+        <p><strong>Jam:</strong> <span id="view-jam"></span></p>
+        <p><strong>Catatan:</strong> <span id="view-catatan"></span></p>
+    </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    const csrfToken = '{{ csrf_token() }}';
+const csrfToken = '{{ csrf_token() }}';
 
-    // Fungsi load reservasi realtime
-    function loadReservasi() {
-        $.get("{{ route('admin.reservasi.data') }}", function(data) {
-            let tbody = '';
-            if(data.length > 0){
-                data.forEach((r, index) => {
-                    let meja = r.meja ? r.meja : '-';
-                    tbody += `
-                        <tr>
-                            <td>${index + 1}</td>
-                            <td>${r.nama}</td>
-                            <td>${r.jumlah_orang}</td>
-                            <td>${meja}</td>
-                            <td>${r.tanggal}</td>
-                            <td>${r.jam}</td>
-                            <td>
-                                <button class="btn-edit-reservasi" data-id="${r.id}" style="background-color:#3498db;color:white;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;margin-right:5px;">Edit</button>
-                                <button class="btn-delete-reservasi" data-id="${r.id}" style="background-color:#e74c3c;color:white;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;">Hapus</button>
-                            </td>
-                        </tr>
-                    `;
-                });
-            } else {
-                tbody = `<tr><td colspan="7" style="font-style:italic; color:#666;">Belum ada reservasi</td></tr>`;
-            }
-            $('#reservasi-body').html(tbody);
-        });
-    }
-
-    // Load pertama kali
-    loadReservasi();
-
-    // Polling 1 detik untuk realtime
-    setInterval(loadReservasi, 1000);
-
-    // Hapus reservasi via AJAX
-    $(document).on('click', '.btn-delete-reservasi', function(){
-        if(!confirm('Yakin ingin hapus reservasi ini?')) return;
-        let id = $(this).data('id');
-        $.ajax({
-            url: `/admin/reservasi/${id}`,
-            type: 'DELETE',
-            data: {_token: csrfToken},
-            success: function(){
-                loadReservasi();
-            },
-            error: function(){
-                alert('Gagal menghapus reservasi. Refresh halaman dan coba lagi.');
-            }
-        });
+function loadReservasi() {
+    $.get("{{ route('admin.reservasi.data') }}", function(data) {
+        let tbody = '';
+        if(data.length > 0){
+            data.forEach((r, index) => {
+                tbody += `
+                    <tr>
+                        <td>${index+1}</td>
+                        <td>${r.nama}</td>
+                        <td>${r.jumlah_orang}</td>
+                        <td>${r.meja}</td>
+                        <td>${r.tanggal}</td>
+                        <td>${r.jam}</td>
+                        <td>${r.catatan ? 'Ada catatan' : '-'}</td>
+                        <td>
+                            <button class="btn-view-reservasi" data-id="${r.id}" data-nama="${r.nama}" data-jumlah="${r.jumlah_orang}" data-meja="${r.meja}" data-tanggal="${r.tanggal}" data-jam="${r.jam}" data-catatan="${r.catatan ?? '-'}" style="background:#f1c40f;color:white;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;margin-right:5px;">Lihat</button>
+                            <button class="btn-delete-reservasi" data-id="${r.id}" style="background:#e74c3c;color:white;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;">Hapus</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        } else {
+            tbody = `<tr><td colspan="8" style="font-style:italic;color:#666;">Belum ada reservasi</td></tr>`;
+        }
+        $('#reservasi-body').html(tbody);
     });
+}
 
-    // Edit reservasi (contoh alert, bisa diganti modal atau redirect)
-    $(document).on('click', '.btn-edit-reservasi', function(){
-        let id = $(this).data('id');
-        // bisa redirect ke halaman edit, contoh:
-        window.location.href = `/admin/reservasi/${id}/edit`;
+// Load pertama kali & polling realtime setiap 1 detik
+loadReservasi();
+setInterval(loadReservasi, 1000);
+
+// Hapus reservasi via AJAX
+$(document).on('click', '.btn-delete-reservasi', function(){
+    if(!confirm('Yakin ingin hapus reservasi ini?')) return;
+    let id = $(this).data('id');
+    $.ajax({
+        url: `/admin/reservasi/${id}`,
+        type: 'DELETE',
+        data: {_token: csrfToken},
+        success: function(){ loadReservasi(); },
+        error: function(){ alert('Gagal menghapus reservasi'); }
     });
+});
+
+// Lihat reservasi (modal)
+$(document).on('click', '.btn-view-reservasi', function(){
+    $('#view-nama').text($(this).data('nama'));
+    $('#view-jumlah').text($(this).data('jumlah'));
+    $('#view-meja').text($(this).data('meja'));
+    $('#view-tanggal').text($(this).data('tanggal'));
+    $('#view-jam').text($(this).data('jam'));
+    $('#view-catatan').text($(this).data('catatan') ? $(this).data('catatan') : 'Tidak ada catatan');
+    $('#modal-view').css('display','flex');
+});
+
+// Tutup modal
+$('#modal-close').click(function(){ $('#modal-view').hide(); });
+$('#modal-view').click(function(e){ if(e.target.id==='modal-view') $(this).hide(); });
 </script>
+
+
 
 
 

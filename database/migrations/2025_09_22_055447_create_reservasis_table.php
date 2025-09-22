@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('reservasis', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');                  // Nama pemesan
-            $table->integer('jumlah_orang');         // Jumlah orang
-            $table->foreignId('meja_id')->constrained('mejas')->onDelete('cascade'); // Meja yang dipilih
-            $table->date('tanggal');                 // Tanggal reservasi
-            $table->time('jam');                     // Jam reservasi
+            $table->string('nama');                       // Nama pemesan
+            $table->integer('jumlah_orang');              // Jumlah orang
+            $table->string('pilihan_meja')->nullable()->default('belum ditentukan'); // Pilihan meja
+            $table->date('tanggal');                      // Tanggal reservasi
+            $table->time('jam');                          // Jam reservasi
+            $table->text('catatan')->nullable();          // Catatan opsional
             $table->timestamps();
         });
     }

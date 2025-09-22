@@ -25,17 +25,18 @@ Route::prefix('user')->group(function () {
         $data = $req->validate([
             'nama'         => 'required|string|max:255',
             'jumlah_orang' => 'required|integer|min:1',
-            'pilihan_meja' => 'nullable|string|max:50',
+            'meja_id'      => 'nullable|exists:mejas,id',  // gunakan meja_id bukan pilihan_meja
             'tanggal'      => 'required|date',
             'jam'          => 'required',
+            'catatan'      => 'nullable|string|max:500',   // catatan opsional
         ]);
 
-        Reservasi::create($data + ['status' => 'Menunggu']);
+        // Simpan reservasi
+        Reservasi::create($data);
 
         return redirect()->route('user.dashboard')->with('success', 'Reservasi berhasil dikirim!');
     })->name('user.reservasi.store');
 });
-
 // ====================== ADMIN ======================
 Route::prefix('admin')->group(function () {
 
@@ -80,39 +81,53 @@ Route::get('login/google/callback', [GoogleController::class, 'handleGoogleCallb
         return view('admin.beranda', compact('reservasi','menu'));
     })->name('admin.beranda');
 
-    // ====================== RESERVASI ======================
-    // Halaman reservasi admin (view)
-    Route::get('reservasi', function() {
-        if (!session('admin_logged_in')) {
-            return redirect()->route('admin.login');
-        }
+   // ====================== RESERVASI ======================
+// Halaman reservasi admin (view)
+Route::get('reservasi', function() {
+    if (!session('admin_logged_in')) {
+        return redirect()->route('admin.login');
+    }
 
-        $reservasi = Reservasi::latest()->get();
-        return view('admin.reservasi', compact('reservasi'));
-    })->name('admin.reservasi');
+    // Ambil semua reservasi terbaru beserta relasi meja
+    $reservasi = Reservasi::with('meja')->latest()->get();
+    return view('admin.reservasi', compact('reservasi'));
+})->name('admin.reservasi');
 
-    // Data reservasi untuk AJAX (realtime)
-    Route::get('reservasi/data', function() {
-        if (!session('admin_logged_in')) {
-            return response()->json([], 401);
-        }
+// Data reservasi untuk AJAX (realtime)
+Route::get('reservasi/data', function() {
+    if (!session('admin_logged_in')) {
+        return response()->json([], 401);
+    }
 
-        $reservasi = Reservasi::latest()->get([
-            'id','nama','jumlah_orang','meja','tanggal','jam','status'
-        ]);
-        return response()->json($reservasi);
-    })->name('admin.reservasi.data');
+    // Ambil semua reservasi dengan relasi meja
+    $reservasi = Reservasi::with('meja')->latest()->get()->map(function($r) {
+        return [
+            'id' => $r->id,
+            'nama' => $r->nama,
+            'jumlah_orang' => $r->jumlah_orang,
+            'meja' => $r->meja ? $r->meja->nama : '-', // tampilkan nama meja jika ada
+            'tanggal' => $r->tanggal,
+            'jam' => $r->jam,
+            'catatan' => $r->catatan ?? '-', // tampilkan catatan jika ada
+        ];
+    });
 
-    // Hapus reservasi
-    Route::delete('reservasi/{id}', function($id){
-        if (!session('admin_logged_in')) {
-            return redirect()->route('admin.login');
-        }
+    return response()->json($reservasi);
+})->name('admin.reservasi.data');
 
-        $r = Reservasi::findOrFail($id);
-        $r->delete();
-        return back()->with('success', 'Reservasi berhasil dihapus');
-    })->name('admin.reservasi.hapus');
+// Hapus reservasi
+Route::delete('reservasi/{id}', function($id){
+    if (!session('admin_logged_in')) {
+        return response()->json(['error' => 'Unauthorized'], 401);
+    }
+
+    $r = Reservasi::findOrFail($id);
+    $r->delete();
+
+    return response()->json(['success' => true]);
+})->name('admin.reservasi.hapus');
+
+
 
    // ====================== MENU ======================
 

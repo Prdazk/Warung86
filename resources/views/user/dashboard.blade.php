@@ -136,7 +136,7 @@
             </section>
 
 
-<section id="reservasi" class="reservasi-section">
+         <section id="reservasi" class="reservasi-section">
   <div style="background: #927950; padding: 30px; border-radius: 20px; box-shadow: 0 8px 20px rgba(90,62,43,0.3); max-width: 950px; margin: auto;">
     
     <!-- Flex 2 kolom -->
@@ -147,57 +147,66 @@
         <h2 style="color: #beb5af; margin-bottom: 20px;">Silakan Pilih Meja</h2>
         <form method="POST" action="{{ route('user.reservasi.store') }}">
           @csrf
+          
+          <!-- Nama & Jumlah Orang -->
           <div style="display: flex; gap: 15px; margin-bottom: 15px;">
             <div style="flex: 1;">
               <label>Nama</label>
               <input type="text" name="nama" placeholder="Masukkan nama" 
-                style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
+                style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c; background-color: #6b5239; color: #fff;">
             </div>
             <div style="flex: 1;">
               <label>Jumlah Orang</label>
               <input type="number" name="jumlah_orang" placeholder="Jumlah orang" 
-                style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
+                style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c; background-color: #6b5239; color: #fff;">
             </div>
           </div>
+            <!-- Pilihan Meja & Tanggal -->
+            <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+              <!-- Pilihan Meja -->
+              <div style="flex: 1;">
+                <label>Pilih Meja</label>
+                <select name="pilihan_meja" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c; background-color: #6b5239; color: #fff;">
+                  <option value="">-- Pilih Meja --</option>
+                  <option value="Meja 1">Meja 1</option>
+                  <option value="Meja 2">Meja 2</option>
+                  <option value="Meja 3">Meja 3</option>
+                  <option value="Meja 4">Meja 4</option>
+                  <option value="Meja 5">Meja 5</option>
+                  <option value="VIP">VIP</option>
+                </select>
+              </div>
 
-          <div style="display: flex; gap: 15px; margin-bottom: 15px;">
-            <div style="flex: 1;">
-              <label>Pilihan Meja</label>
-              <select name="pilihan_meja" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
-                <option value="">Pilih Meja</option>
-                <option value="1">Meja 1</option>
-                <option value="2">Meja 2</option>
-                <option value="3">Meja 3</option>
-                <option value="VIP">VIP</option>
-              </select>
+              <!-- Tanggal Reservasi -->
+              <div style="flex: 1;">
+                <label>Tanggal</label>
+                <input type="date" name="tanggal" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c; background-color: #6b5239; color: #fff;">
+              </div>
             </div>
-            <div style="flex: 1;">
-              <label>Tanggal</label>
-              <input type="date" name="tanggal" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
-            </div>
+
+
+          <!-- Jam -->
+          <div style="margin-bottom: 15px; text-align: center;">
+            <label style="display: block; margin-bottom: 5px;">Jam</label>
+            <input type="time" name="jam" 
+              style="width: 50%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c; background-color: #a68154; color: #fff; text-align: center;">
           </div>
 
-          <div style="display: flex; gap: 15px; margin-bottom: 15px;">
-            <div style="flex: 1;">
-              <label>Jam</label>
-              <input type="time" name="jam" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c;">
-            </div>
-            <div style="flex: 1;">
-              <label>Status</label>
-              <select name="status" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c; color:#333; background-color:#c49a6c;">
-                <option value="menunggu" {{ ($reservasi->status ?? '') == 'menunggu' ? 'selected' : '' }}>Menunggu</option>
-                <option value="konfirmasi" {{ ($reservasi->status ?? '') == 'konfirmasi' ? 'selected' : '' }}>Dikonfirmasi</option>
-                <option value="batal" {{ ($reservasi->status ?? '') == 'batal' ? 'selected' : '' }}>Batal</option>
-              </select>
-            </div>
+          <!-- Catatan -->
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px;">Catatan</label>
+            <textarea name="catatan" placeholder="Tulis catatan di sini..." 
+              style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #c49a6c; background-color: #a68154; color: #fff; min-height: 100px; resize: vertical;"></textarea>
           </div>
 
+          <!-- Tombol Submit -->
           <button type="submit" 
-            style="width: 100%; background: #0a0a0a; color: #9b992f; padding: 12px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.3s;">
+            style="width: 100%; background: #160b0b; color: #9b992f; padding: 12px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.3s;">
             Pesan Sekarang
           </button>
         </form>
       </div>
+
 
       <!-- SYARAT & KETENTUAN -->
       <div style="flex: 1 1 45%; background: #5a3e2b; padding: 25px; border-radius: 15px; min-height: 520px;">
@@ -214,6 +223,9 @@
     </div>
   </div>
 </section>
+
+
+
    <section id="lokasi" class="lokasi-section" style="margin-top:50px; text-align:center;">
   <h2 style="color:#b9b4ae; margin-bottom:20px;">Lokasi Kami</h2>
 

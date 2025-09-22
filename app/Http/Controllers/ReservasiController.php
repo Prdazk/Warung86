@@ -18,10 +18,19 @@ class ReservasiController extends Controller
             'tanggal' => 'required|date',
             'jam' => 'required',
             'pilihan_meja' => 'nullable|string|max:50',
+            'catatan' => 'nullable|string|max:500',
         ]);
 
         // Simpan data baru
-        $reservasi = Reservasi::create($request->all());
+        $reservasi = Reservasi::create([
+            'nama' => $request->nama,
+            'no_hp' => $request->no_hp,
+            'jumlah_orang' => $request->jumlah_orang,
+            'tanggal' => $request->tanggal,
+            'jam' => $request->jam,
+            'pilihan_meja' => $request->pilihan_meja ?? null,
+            'catatan' => $request->catatan ?? null,
+        ]);
 
         // Jika request AJAX, kembalikan data baru sebagai JSON
         if ($request->ajax()) {
@@ -32,7 +41,7 @@ class ReservasiController extends Controller
                 'pilihan_meja' => $reservasi->pilihan_meja ?? '-',
                 'tanggal' => $reservasi->tanggal ? Carbon::parse($reservasi->tanggal)->format('d-m-Y') : '-',
                 'jam' => $reservasi->jam ? Carbon::parse($reservasi->jam)->format('H:i') : '-',
-                'status' => $reservasi->status ?? 'Pending',
+                'catatan' => $reservasi->catatan ?? '-',
             ]);
         }
 
@@ -50,7 +59,7 @@ class ReservasiController extends Controller
                 'pilihan_meja' => $r->pilihan_meja ?? '-',
                 'tanggal' => $r->tanggal ? Carbon::parse($r->tanggal)->format('d-m-Y') : '-',
                 'jam' => $r->jam ? Carbon::parse($r->jam)->format('H:i') : '-',
-                'status' => $r->status ?? 'Pending',
+                'catatan' => $r->catatan ?? '-',
             ];
         });
 
@@ -65,7 +74,6 @@ class ReservasiController extends Controller
         if($reservasi){
             $reservasi->delete();
 
-            // Jika AJAX, kembalikan sukses
             if (request()->ajax()) {
                 return response()->json(['success' => true]);
             }
@@ -88,10 +96,10 @@ class ReservasiController extends Controller
                 'id' => $r->id,
                 'nama' => $r->nama,
                 'jumlah_orang' => $r->jumlah_orang,
-                'pilihan_meja' => $r->pilihan_meja ?? '-',
+                'meja' => $r->meja ? $r->meja->nama : '-', // <- pakai relasi meja
                 'tanggal' => $r->tanggal ? Carbon::parse($r->tanggal)->format('d-m-Y') : '-',
                 'jam' => $r->jam ? Carbon::parse($r->jam)->format('H:i') : '-',
-                'status' => $r->status ?? 'Pending',
+                'catatan' => $r->catatan ?? '-',
             ];
         });
 

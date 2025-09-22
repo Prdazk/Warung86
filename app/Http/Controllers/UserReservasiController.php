@@ -3,23 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Meja;
 use App\Models\Reservasi;
 
 class UserReservasiController extends Controller
 {
-    // Halaman form reservasi
-    public function create()
+    // Halaman form reservasi + daftar reservasi user
+    public function index()
     {
-        // Ambil meja yang tersedia (sisa_kursi > 0)
-        $meja = Meja::where('sisa_kursi', '>', 0)->get();
-        
-        // Jika tidak ada meja yang tersedia
-        if ($meja->isEmpty()) {
-            return view('user.reservasi.create', compact('meja'))->with('error', 'Tidak ada meja tersedia');
-        }
-
-        return view('user.reservasi.create', compact('meja'));
+        $reservasi = Reservasi::orderBy('tanggal', 'desc')->get();
+        return view('user.reservasi.index', compact('reservasi'));
     }
 
     // Simpan reservasi
@@ -28,32 +20,29 @@ class UserReservasiController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'jumlah_orang' => 'required|integer|min:1',
-            'pilihan_meja' => 'required|exists:mejas,id',
+            'pilihan_meja' => 'required|string|max:50', // string saja
             'tanggal' => 'required|date',
-            'jam' => 'required'
+            'jam' => 'required',
+            'catatan' => 'nullable|string|max:500'
         ]);
 
-        // Ambil data meja berdasarkan pilihan
-        $meja = Meja::find($request->pilihan_meja);
+        Reservasi::create($request->only([
+            'nama', 'jumlah_orang', 'pilihan_meja', 'tanggal', 'jam', 'catatan'
+        ]));
 
-        // Jika jumlah orang lebih banyak dari kursi yang tersedia
-        if ($request->jumlah_orang > $meja->sisa_kursi) {
-            return back()->withErrors(['jumlah_orang' => 'Jumlah orang melebihi kursi yang tersedia.']);
+        return redirect()->route('user.reservasi.index')->with('success', 'Reservasi berhasil!');
+    }
+
+    // Hapus reservasi user
+    public function destroy($id)
+    {
+        $reservasi = Reservasi::find($id);
+
+        if(!$reservasi) {
+            return back()->with('error', 'Reservasi tidak ditemukan.');
         }
 
-        // Simpan data reservasi
-        Reservasi::create([
-            'nama' => $request->nama,
-            'jumlah_orang' => $request->jumlah_orang,
-            'meja_id' => $meja->id,
-            'tanggal' => $request->tanggal,
-            'jam' => $request->jam
-        ]);
-
-        // Update sisa kursi meja
-        $meja->sisa_kursi -= $request->jumlah_orang;
-        $meja->save();
-
-        return redirect()->route('user.reservasi.create')->with('success', 'Reservasi berhasil!');
+        $reservasi->delete();
+        return back()->with('success', 'Reservasi berhasil dihapus.');
     }
 }
