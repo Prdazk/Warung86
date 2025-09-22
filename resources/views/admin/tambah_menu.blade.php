@@ -32,14 +32,22 @@
         </div>
       @endif
 
-      <form action="{{ route('admin.menu.store') }}" method="POST" enctype="multipart/form-data">
+      <form action="{{ route('admin.menu.store') }}" method="POST">
         @csrf
 
+        <!-- Nama Menu -->
         <div class="form-group">
           <label for="nama">Nama Menu</label>
           <input type="text" id="nama" name="nama" value="{{ old('nama') }}" required>
         </div>
 
+        <!-- Harga -->
+        <div class="form-group">
+          <label for="harga">Harga</label>
+          <input type="number" id="harga" name="harga" value="{{ old('harga') }}" required>
+        </div>
+
+        <!-- Kategori -->
         <div class="form-group">
           <label for="kategori">Kategori</label>
           <select id="kategori" name="kategori" required>
@@ -49,11 +57,7 @@
           </select>
         </div>
 
-        <div class="form-group">
-          <label for="harga">Harga</label>
-          <input type="number" id="harga" name="harga" value="{{ old('harga') }}" required>
-        </div>
-
+        <!-- Status -->
         <div class="form-group">
           <label for="status">Status</label>
           <select id="status" name="status" required>
@@ -62,11 +66,7 @@
           </select>
         </div>
 
-        <div class="form-group">
-          <label for="gambar">Gambar</label>
-          <input type="file" id="gambar" name="gambar" accept="image/*">
-        </div>
-
+        <!-- Tombol -->
         <button type="submit" class="btn-submit">Simpan</button>
         <div class="back-home">
           <a href="{{ route('admin.beranda') }}">Batal & Kembali</a>

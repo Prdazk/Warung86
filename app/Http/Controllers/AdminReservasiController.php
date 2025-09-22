@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Reservasi;
 
 class AdminReservasiController extends Controller
 {
-    // Halaman reservasi
     public function index()
     {
         if (!session('admin_logged_in')) {
@@ -18,7 +18,6 @@ class AdminReservasiController extends Controller
         return view('admin.reservasi', compact('reservasi'));
     }
 
-    // Data reservasi untuk AJAX
     public function data()
     {
         if (!session('admin_logged_in')) {
@@ -40,7 +39,6 @@ class AdminReservasiController extends Controller
         return response()->json($reservasi);
     }
 
-    // Hapus reservasi
     public function destroy($id)
     {
         if (!session('admin_logged_in')) {

@@ -42,7 +42,8 @@
 
  
        <!-- Menu Section -->
-<section id="menu">
+
+       <section id="menu">
   <div class="menu-wrapper">
     <h2 style="text-align:center;">Daftar Menu Masuk</h2>
 
@@ -56,8 +57,7 @@
       <table class="menu-table">
         <thead>
           <tr>
-            <th>No</th> <!-- Kolom nomor baru -->
-            <th>Gambar</th>
+            <th>No</th> <!-- Kolom nomor -->
             <th>Nama</th>
             <th>Harga</th>
             <th>Kategori</th>
@@ -71,13 +71,6 @@
           @forelse($menu as $m)
             <tr>
               <td>{{ $loop->iteration }}</td> <!-- Nomor otomatis -->
-              <td>
-                @if($m->gambar)
-                  <img src="{{ asset('storage/menu/' . $m->gambar) }}" alt="{{ $m->nama }}" style="width:60px; height:60px; object-fit:cover; border-radius:6px;">
-                @else
-                  <span style="color:#aaa; font-size:0.85em;">Tidak ada</span>
-                @endif
-              </td>
               <td>{{ $m->nama }}</td>
               <td>Rp {{ number_format($m->harga,0,',','.') }}</td>
               <td>{{ $m->kategori }}</td>
@@ -89,22 +82,20 @@
                 @endif
               </td>
               <td>
-            <form action="{{ route('admin.menu.hapus', $m->id) }}" method="POST" style="display:inline;">
-                @csrf
-                @method('DELETE')
-                <button type="submit"
-                        onclick="return confirm('Yakin ingin hapus menu ini?')"
-                        class="btn btn-delete">
-                    Hapus
-                </button>
+                <form action="{{ route('admin.menu.hapus', $m->id) }}" method="POST" style="display:inline;">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit"
+                          onclick="return confirm('Yakin ingin hapus menu ini?')"
+                          class="btn btn-delete">
+                      Hapus
+                  </button>
                 </form>
-
-
               </td>
             </tr>
           @empty
             <tr>
-              <td colspan="7" class="no-data">Belum ada menu</td> <!-- colspan disesuaikan -->
+              <td colspan="6" class="no-data">Belum ada menu</td> <!-- colspan disesuaikan -->
             </tr>
           @endforelse
         </tbody>
@@ -112,7 +103,6 @@
     </div>
   </div>
 </section>
-
 
 
        <!-- Tambahkan meta CSRF di <head> -->

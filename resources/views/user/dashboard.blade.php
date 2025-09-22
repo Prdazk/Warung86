@@ -37,103 +37,42 @@
                     </div>
                 </div>
                 </section>
-            <section id="popular-menu" class="menu-section">
-            <div class="container">
-                <h2 class="menu-title">MENU TERPOPULER</h2>
-                <div class="menu-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
-                
-                <!-- Menu Item -->
-                <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <img src="{{ asset('images/enak.jpg') }}" alt="Americano" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
-                    <h3>Tepo Pecel</h3>
-                    <p>mantap, simple, enak.</p>
-                    <p class="menu-item-price">19k</p>
-                    <div>
+
+           <section id="popular-menu" class="menu-section">
+    <div class="container">
+        <h2 class="menu-title">MENU TERPOPULER</h2>
+        <div class="menu-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+
+            @forelse($menus as $menu)
+            <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
+                {{-- Jika ada gambar, tampilkan, jika tidak pakai default --}}
+                <img src="{{ $menu->gambar ? asset('images/'.$menu->gambar) : asset('images/default.jpg') }}" 
+                     alt="{{ $menu->nama }}" 
+                     style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
+
+                <h3>{{ $menu->nama }}</h3>
+                <p class="menu-item-price">Rp {{ number_format($menu->harga, 0, ',', '.') }}</p>
+                <p>Status: 
+                    @if($menu->status === 'tersedia')
+                        <span style="color:green;">Tersedia</span>
+                    @else
+                        <span style="color:red;">Habis</span>
+                    @endif
+                </p>
+
+                <div>
                     <button style="padding:8px 15px; margin:5px; border:none; border-radius:5px; background:#e97425; color:#fff;">Lihat</button>
                     <button style="padding:8px 15px; margin:5px; border:none; border-radius:5px; background:#28a745; color:#fff;">Checkout</button>
-                    </div>
-                </article>
-
-                <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <img src="{{ asset('images/enak.jpg') }}" alt="Mexican" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
-                    <h3>Rujak Petis</h3>
-                    <p>Balanced and flavorful.</p>
-                    <p class="menu-item-price">$19.99</p>
-                    <div>
-                    <button style="padding:8px 15px; margin:5px; border:none; border-radius:5px; background:#e97425; color:#fff;">Lihat</button>
-                    <button style="padding:8px 15px; margin:5px; border:none; border-radius:5px; background:#28a745; color:#fff;">Checkout</button>
-                    </div>
-                </article>
-
-                <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <img src="{{ asset('images/jus.jpg') }}" alt="Cappuccino" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
-                    <h3>tepo Ces</h3>
-                    <p>Rich and creamy taste.</p>
-                    <p class="menu-item-price">$19.99</p>
-                    <div>
-                    <button style="padding:8px 15px; margin:5px; border:none; border-radius:5px; background:#e97425; color:#fff;">Lihat</button>
-                    <button style="padding:8px 15px; margin:5px; border:none; border-radius:5px; background:#28a745; color:#fff;">Checkout</button>
-                    </div>
-                </article>
-
-                <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <img src="{{ asset('images/enak.jpg') }}" alt="Latte" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
-                    <h3>Tahu Tek Jumbo</h3>
-                    <p>Smooth and milky.</p>
-                    <p class="menu-item-price">$21.99</p>
-                    <div>
-                    <button style="padding:8px 15px; margin:5px; border:none; border-radius:5px; background:#e97425; color:#fff;">Lihat</button>
-                    <button style="padding:8px 15px; margin:5px; border:none; border-radius:5px; background:#28a745; color:#fff;">Checkout</button>
-                    </div>
-                </article>
-
-                <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <img src="{{ asset('images/enak.jpg') }}" alt="Mocha" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
-                    <h3>Krupuk Pecel</h3>
-                    <p>Chocolate infused.</p>
-                    <p class="menu-item-price">$22.99</p>
-                    <div>
-                    <button style="padding:8px 15px; margin:5px; border:none; border-radius:5px; background:#e97425; color:#fff;">Lihat</button>
-                    <button style="padding:8px 15px; margin:5px; border:none; border-radius:5px; background:#28a745; color:#fff;">Checkout</button>
-                    </div>
-                </article>
-
-                <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <img src="{{ asset('images/jus.jpg') }}" alt="Espresso" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
-                    <h3>Simpolan</h3>
-                    <p>Strong and bold.</p>
-                    <p class="menu-item-price">$18.99</p>
-                    <div>
-                    <button style="padding:8px 15px; margin:5px; border:none; border-radius:5px; background:#e97425; color:#fff;">Lihat</button>
-                    <button style="padding:8px 15px; margin:5px; border:none; border-radius:5px; background:#28a745; color:#fff;">Checkout</button>
-                    </div>
-                </article>
-
-                <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <img src="{{ asset('images/enak.jpg') }}" alt="Flat White" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
-                    <h3>Es Blewah</h3>
-                    <p>Silky and smooth.</p>
-                    <p class="menu-item-price">$20.99</p>
-                    <div>
-                    <button style="padding:8px 15px; margin:5px; border:none; border-radius:5px; background:#e97425; color:#fff;">Lihat</button>
-                    <button style="padding:8px 15px; margin:5px; border:none; border-radius:5px; background:#28a745; color:#fff;">Checkout</button>
-                    </div>
-                </article>
-
-                <article class="menu-item" style="border: 1px solid #ddd; border-radius: 10px; text-align: center; padding: 15px;">
-                    <img src="{{ asset('images/enak.jpg') }}" alt="Macchiato" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
-                    <h3>Ayam Goreng</h3>
-                    <p>Bold with foam.</p>
-                    <p class="menu-item-price">$21.99</p>
-                    <div>
-                    <button style="padding:8px 15px; margin:5px; border:none; border-radius:5px; background:#e97425; color:#fff;">Lihat</button>
-                    <button style="padding:8px 15px; margin:5px; border:none; border-radius:5px; background:#28a745; color:#fff;">Checkout</button>
-                    </div>
-                </article>
-
                 </div>
-            </div>
-            </section>
+            </article>
+            @empty
+                <p>Menu belum tersedia.</p>
+            @endforelse
+
+        </div>
+    </div>
+</section>
+
 
 
          <section id="reservasi" class="reservasi-section">
